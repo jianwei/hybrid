@@ -93,7 +93,11 @@ export default defineConfig<'webpack5'>(async (merge) => {
       }
     },
     rn: {
-      appName: 'taroDemo',
+      appName: 'HybridApp',
+      output: {
+        ios: '../ios/bundle/main.jsbundle',
+        iosAssetsDest: '../ios/bundle'
+      },
       postcss: {
         cssModules: {
           enable: false, // 默认为 false，如需使用 css modules 功能，则设为 true

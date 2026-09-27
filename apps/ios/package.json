@@ -1,0 +1,11 @@
+{
+  "name": "@hybrid/ios",
+  "version": "1.0.0",
+  "private": true,
+  "description": "加载 Taro React Native 内容的 iOS 宿主",
+  "scripts": {
+    "bundle": "pnpm --filter taro run build:rn:ios",
+    "pods": "bundle exec pod install",
+    "open": "open HybridApp.xcworkspace"
+  }
+}

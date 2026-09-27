@@ -1,6 +1,6 @@
 # Taro 应用
 
-`apps/taro` 是 Hybrid pnpm monorepo 中的 Taro 子项目，使用 Taro 4.2.1、React 18.3.1、TypeScript 6.0.3 和 Webpack 5.91.0。依赖安装和锁文件由仓库根目录统一管理。
+`apps/taro` 是 Hybrid pnpm monorepo 中的 Taro 子项目，使用 Taro 4.2.1、React 18.2.0、TypeScript 6.0.3 和 Webpack 5.91.0。依赖安装和锁文件由仓库根目录统一管理。
 
 ## 开发与构建
 
@@ -19,7 +19,7 @@ pnpm build:h5
 pnpm build:weapp
 ```
 
-根目录只为 H5 和微信小程序提供快捷命令。运行其他平台脚本时使用：
+根目录提供 H5、微信小程序和 iOS 快捷命令。运行其他平台脚本时使用：
 
 ```sh
 pnpm --filter taro run dev:<平台>
@@ -52,6 +52,14 @@ H5 和各小程序平台共用 `apps/taro/dist/`。切换目标平台前需要�
 
 H5 使用 History 路由，页面地址不包含 `#`。部署时需要把不存在的文件路径回退到 `index.html`，否则直接访问或刷新子页面会返回 404；静态资源路径不应被回退。
 
+## iOS React Native
+
+`pnpm dev:ios` 启动 Taro Metro；`pnpm build:ios` 生成 `apps/ios/bundle/main.jsbundle` 与图片资源，不覆盖 H5/小程序的 `dist/`。`rn.appName` 必须与原生宿主的 `HybridApp` 模块名一致。
+
+`index.js` 与 `metro.config.js` 接入 Taro RN 编译器；Metro 的 `watchFolders` 覆盖 workspace 根目录以解析 pnpm 符号链接。iOS 构建脚本直接调用与 Taro 4.2.1 runner 相同的 RN bundle 命令，仍通过 Taro Metro transformer 编译，以确保构建失败能返回非零退出码。
+
+原生启动、依赖安装和 Release 运行方式见 [iOS 宿主说明](../ios/README.md)。
+
 ## 微信小程序 AppID
 
 `project.config.json` 当前使用 Taro 模板占位值 `touristappid`，三个 `.env.*` 文件也只有 `TARO_APP_ID` 的注释示例。进行正式微信小程序调试或发布前，应在对应环境文件中配置有效的 `TARO_APP_ID`，然后重新构建并使用微信开发者工具打开 `apps/taro/`。
@@ -60,7 +68,9 @@ H5 使用 History 路由，页面地址不包含 `#`。部署时需要把不存�
 
 - Taro 4.2.1 的 `@tarojs/webpack5-runner`、`@tarojs/taro-loader` 和 `@tarojs/webpack5-prebundle` 将 Webpack peer 依赖精确约束为 5.91.0，因此不能直接升级到 Webpack 5.111.1。
 - TypeScript 使用 6.0.3。TypeScript 7.0.2 虽可通过当前源码的类型检查，但与 Taro 的 ESLint 解析链不兼容。
-- React 保持 18.3.1，符合当前 Taro React 插件的兼容范围。
+- React 与 React DOM 固定 18.2.0，匹配 RN 0.73.11 的精确 React peer，同时满足 Taro 的 React 18 要求。
+- RN 使用 Taro 4.2.1 官方壳对应的 RN 0.73、Expo 50 依赖组合。Stylelint 固定 16.4.0、standard 配置固定 36.0.1，避免 Taro RN 样式插件引用的内部函数在新版中被移除。
+- `pnpm-workspace.yaml` 只为 Taro 内置旧 Ant Design RN / CameraRoll 的三条旧 peer 声明设置精确兼容例外，安装仍可使用严格 peer 检查。
 - H5 生产目标包含 Android 4.1、iOS 8 等旧浏览器；构建配置会对依赖进行转译，真实设备兼容性仍需单独验证。
 
 工作区管理、添加依赖和 Git hooks 约定见[仓库根目录说明](../../README.md)。

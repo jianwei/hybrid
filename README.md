@@ -1,11 +1,12 @@
 # Hybrid
 
-Hybrid 是使用 pnpm workspace 管理的 monorepo。当前应用为 `apps/taro`，后续应用统一放入 `apps/`。
+Hybrid 是使用 pnpm workspace 管理的 monorepo。共享页面位于 `apps/taro`，iOS 原生宿主位于 `apps/ios`。
 
 ```text
 hybrid/
 ├── apps/
-│   └── taro/               # Taro React 应用
+│   ├── taro/               # Taro React 应用与 RN 依赖
+│   └── ios/                # 加载 RN 内容的 iOS 宿主 App
 ├── package.json            # 根命令与 Node、pnpm 版本约束
 ├── pnpm-workspace.yaml     # workspace 范围与安装策略
 └── pnpm-lock.yaml          # 全仓唯一锁文件
@@ -37,6 +38,18 @@ pnpm --filter taro run <脚本名>
 ```
 
 Taro 的平台脚本、配置入口、构建产物和依赖兼容范围见 [Taro 应用说明](apps/taro/README.md)。
+
+## iOS 宿主
+
+首次按 [iOS 宿主说明](apps/ios/README.md) 安装 CocoaPods 依赖，然后执行：
+
+```sh
+pnpm dev:ios       # 启动 Taro Metro，供 Xcode Debug 加载
+pnpm build:ios     # 编译内置的 iOS RN bundle 与资源
+pnpm ios:open      # 打开 HybridApp.xcworkspace
+```
+
+`build:ios` 只编译 JavaScript 和资源；原生 App 在 Xcode 中构建、运行和归档。
 
 ## 工作区约定
 

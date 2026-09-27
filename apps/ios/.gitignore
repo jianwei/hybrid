@@ -1,0 +1,8 @@
+Pods/
+build/
+bundle/
+.bundle/
+vendor/
+*.xcuserstate
+xcuserdata/
+.xcode.env.local

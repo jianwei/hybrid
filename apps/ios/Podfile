@@ -1,0 +1,33 @@
+require 'json'
+
+taro_root = File.expand_path('../taro', __dir__)
+ENV['RCT_NEW_ARCH_ENABLED'] = '0'
+
+Dir.chdir(taro_root) do
+  require File.join(File.dirname(`node --print "require.resolve('expo/package.json')"`.strip), 'scripts/autolinking')
+  require Pod::Executable.execute_command('node', ['-p', 'require.resolve("react-native/scripts/react_native_pods.rb")']).strip
+end
+
+platform :ios, '13.4'
+prepare_react_native_project!
+
+target 'HybridApp' do
+  use_expo_modules!(:searchPaths => [File.join(taro_root, 'node_modules')])
+
+  config = Dir.chdir(taro_root) { use_native_modules! }
+  use_react_native!(
+    :path => config[:reactNativePath],
+    :app_path => taro_root,
+    :hermes_enabled => true,
+    :fabric_enabled => false,
+    :flipper_configuration => FlipperConfiguration.disabled
+  )
+
+  post_install do |installer|
+    react_native_post_install(installer, config[:reactNativePath], :mac_catalyst_enabled => false)
+  end
+
+  post_integrate do |installer|
+    expo_patch_react_imports!(installer)
+  end
+end

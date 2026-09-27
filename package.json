@@ -7,7 +7,11 @@
     "build:h5": "pnpm --filter taro run build:h5",
     "build:weapp": "pnpm --filter taro run build:weapp",
     "typecheck": "pnpm --filter taro run typecheck",
-    "lint": "pnpm --filter taro run lint"
+    "lint": "pnpm --filter taro run lint",
+    "dev:ios": "pnpm --filter taro run dev:rn:ios",
+    "build:ios": "pnpm --filter @hybrid/ios run bundle",
+    "ios:pods": "pnpm --filter @hybrid/ios run pods",
+    "ios:open": "pnpm --filter @hybrid/ios run open"
   },
   "engines": {
     "node": ">=24.11.0"
