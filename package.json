@@ -1,0 +1,16 @@
+{
+  "name": "hybrid",
+  "private": true,
+  "scripts": {
+    "dev:h5": "pnpm --filter taro run dev:h5",
+    "dev:weapp": "pnpm --filter taro run dev:weapp",
+    "build:h5": "pnpm --filter taro run build:h5",
+    "build:weapp": "pnpm --filter taro run build:weapp",
+    "typecheck": "pnpm --filter taro run typecheck",
+    "lint": "pnpm --filter taro run lint"
+  },
+  "engines": {
+    "node": ">=24.11.0"
+  },
+  "packageManager": "pnpm@12.3.4"
+}

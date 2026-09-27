@@ -107,7 +107,9 @@ settings:
 
 importers:
 
-  .:
+  .: {}
+
+  apps/taro:
     dependencies:
       '@babel/runtime':
         specifier: ^7.29.7
