@@ -24,3 +24,7 @@ TestResults.xml
 
 # pnpm 工作区依赖
 node_modules/
+
+# 全仓构建交付物和构建缓存
+/dist/
+/.cache/

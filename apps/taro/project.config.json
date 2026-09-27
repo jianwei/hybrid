@@ -1,5 +1,5 @@
 {
-  "miniprogramRoot": "./dist",
+  "miniprogramRoot": "../../dist/weapp/",
   "projectname": "taro",
   "description": "Taro React TypeScript 项目",
   "appid": "touristappid",

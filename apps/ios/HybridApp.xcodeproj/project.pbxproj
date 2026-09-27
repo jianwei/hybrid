@@ -8,17 +8,25 @@
 
 /* Begin PBXBuildFile section */
 		04A84CB2A779FF506A763C19 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB34C487FD70A4DCE6CFE565 /* Foundation.framework */; };
+		172B4F5EDC253AFB9054EED2 /* libPods-HybridApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2546B5EDDB0E7DAC46E73063 /* libPods-HybridApp.a */; };
+		18865FB51DC334495400DBCD /* ExpoModulesProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9986B1030E7F6F96D729C37D /* ExpoModulesProvider.swift */; };
 		7D560A47C39AF78E2B7C45B4 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CD83C8D8F6CAF3313BBB48C8 /* main.m */; };
 		B1B8416F3D61F7F0B5766768 /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8036A6FAFA3BB87954E1B845 /* AppDelegate.mm */; };
 		B593E812C46C35C89394FB0F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1672193844454D09295FC116 /* LaunchScreen.storyboard */; };
+		D9DB892972685B7A4CB20CD1 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 4C8DB2DD2284D087009988A2 /* PrivacyInfo.xcprivacy */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		1672193844454D09295FC116 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		2546B5EDDB0E7DAC46E73063 /* libPods-HybridApp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-HybridApp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		27F1F3BA1761F368980A4E84 /* Pods-HybridApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HybridApp.release.xcconfig"; path = "Target Support Files/Pods-HybridApp/Pods-HybridApp.release.xcconfig"; sourceTree = "<group>"; };
 		4554AB76ED21AB22B3110348 /* HybridApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HybridApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		4C8DB2DD2284D087009988A2 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; includeInIndex = 1; name = PrivacyInfo.xcprivacy; path = ../PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		4DC02DD3966A081DDB970D5F /* AppDelegate.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		8036A6FAFA3BB87954E1B845 /* AppDelegate.mm */ = {isa = PBXFileReference; includeInIndex = 1; path = AppDelegate.mm; sourceTree = "<group>"; };
+		9986B1030E7F6F96D729C37D /* ExpoModulesProvider.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ExpoModulesProvider.swift; path = "Pods/Target Support Files/Pods-HybridApp/ExpoModulesProvider.swift"; sourceTree = "<group>"; };
 		CD83C8D8F6CAF3313BBB48C8 /* main.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		D766CFEDE0C2BEFA022A6C4D /* Pods-HybridApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HybridApp.debug.xcconfig"; path = "Target Support Files/Pods-HybridApp/Pods-HybridApp.debug.xcconfig"; sourceTree = "<group>"; };
 		DB34C487FD70A4DCE6CFE565 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS18.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		E3C70A678A6B07C5B573F603 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -29,6 +37,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				04A84CB2A779FF506A763C19 /* Foundation.framework in Frameworks */,
+				172B4F5EDC253AFB9054EED2 /* libPods-HybridApp.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -39,8 +48,19 @@
 			isa = PBXGroup;
 			children = (
 				8567BCF355F1B3149B57BE4D /* iOS */,
+				2546B5EDDB0E7DAC46E73063 /* libPods-HybridApp.a */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		172E9BA8DB74BC6DAAEF1765 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				27F1F3BA1761F368980A4E84 /* Pods-HybridApp.release.xcconfig */,
+				D766CFEDE0C2BEFA022A6C4D /* Pods-HybridApp.debug.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
 			sourceTree = "<group>";
 		};
 		22AF5091EBCBCDCC79E86134 /* HybridApp */ = {
@@ -51,9 +71,18 @@
 				CD83C8D8F6CAF3313BBB48C8 /* main.m */,
 				E3C70A678A6B07C5B573F603 /* Info.plist */,
 				1672193844454D09295FC116 /* LaunchScreen.storyboard */,
+				4C8DB2DD2284D087009988A2 /* PrivacyInfo.xcprivacy */,
 			);
 			name = HybridApp;
 			path = HybridApp;
+			sourceTree = "<group>";
+		};
+		53B27B1FB5250C9131C5B84D /* HybridApp */ = {
+			isa = PBXGroup;
+			children = (
+				9986B1030E7F6F96D729C37D /* ExpoModulesProvider.swift */,
+			);
+			name = HybridApp;
 			sourceTree = "<group>";
 		};
 		8567BCF355F1B3149B57BE4D /* iOS */ = {
@@ -78,7 +107,17 @@
 				860A705C40C3A5BC1119DAFF /* Products */,
 				108BD3D4724EFFE5FB0A8ED1 /* Frameworks */,
 				22AF5091EBCBCDCC79E86134 /* HybridApp */,
+				172E9BA8DB74BC6DAAEF1765 /* Pods */,
+				A9D6F081C03D04268629A0FC /* ExpoModulesProviders */,
 			);
+			sourceTree = "<group>";
+		};
+		A9D6F081C03D04268629A0FC /* ExpoModulesProviders */ = {
+			isa = PBXGroup;
+			children = (
+				53B27B1FB5250C9131C5B84D /* HybridApp */,
+			);
+			name = ExpoModulesProviders;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -88,10 +127,14 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4F0B6CD5A1E55C6CD7E24510 /* Build configuration list for PBXNativeTarget "HybridApp" */;
 			buildPhases = (
+				624571E6B60C8738762E989E /* [CP] Check Pods Manifest.lock */,
+				9FB01BAC69073B414A7B3B8B /* [Expo] Configure project */,
 				AB23FE897D25E29CCF3DD4F2 /* Sources */,
 				FEF6037E959BFBF8E22F89A4 /* Frameworks */,
 				C04E58C573814B2CC9ADD116 /* Resources */,
 				0757B6F9F805E83F42A68BF9 /* 嵌入 Taro RN bundle */,
+				67C6C2BB2280FE25E1CBE93D /* [CP] Embed Pods Frameworks */,
+				95F730BCE3145584A65BC5E1 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -137,6 +180,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B593E812C46C35C89394FB0F /* LaunchScreen.storyboard in Resources */,
+				D9DB892972685B7A4CB20CD1 /* PrivacyInfo.xcprivacy in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -162,6 +206,93 @@
 			shellPath = /bin/sh;
 			shellScript = "/bin/sh \"$PROJECT_DIR/scripts/copy-bundle.sh\"";
 		};
+		624571E6B60C8738762E989E /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-HybridApp-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		67C6C2BB2280FE25E1CBE93D /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-HybridApp/Pods-HybridApp-frameworks.sh",
+				"${PODS_XCFRAMEWORKS_BUILD_DIR}/hermes-engine/Pre-built/hermes.framework/hermes",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/hermes.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-HybridApp/Pods-HybridApp-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		95F730BCE3145584A65BC5E1 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-HybridApp/Pods-HybridApp-resources.sh",
+				"${PODS_CONFIGURATION_BUILD_DIR}/EXConstants/EXConstants.bundle",
+				"${PODS_CONFIGURATION_BUILD_DIR}/EXConstants/ExpoConstants_privacy.bundle",
+				"${PODS_CONFIGURATION_BUILD_DIR}/ExpoFileSystem/ExpoFileSystem_privacy.bundle",
+				"${PODS_CONFIGURATION_BUILD_DIR}/RNDeviceInfo/RNDeviceInfoPrivacyInfo.bundle",
+				"${PODS_CONFIGURATION_BUILD_DIR}/React-Core/RCTI18nStrings.bundle",
+				"${PODS_CONFIGURATION_BUILD_DIR}/react-native-cameraroll/RNCameraRollPrivacyInfo.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/EXConstants.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/ExpoConstants_privacy.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/ExpoFileSystem_privacy.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/RNDeviceInfoPrivacyInfo.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/RCTI18nStrings.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/RNCameraRollPrivacyInfo.bundle",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-HybridApp/Pods-HybridApp-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9FB01BAC69073B414A7B3B8B /* [Expo] Configure project */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "[Expo] Configure project";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# This script configures Expo modules and generates the modules provider file.\nbash -l -c \"./Pods/Target\\ Support\\ Files/Pods-HybridApp/expo-configure-project.sh\"\n";
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -171,6 +302,7 @@
 			files = (
 				B1B8416F3D61F7F0B5766768 /* AppDelegate.mm in Sources */,
 				7D560A47C39AF78E2B7C45B4 /* main.m in Sources */,
+				18865FB51DC334495400DBCD /* ExpoModulesProvider.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -179,6 +311,7 @@
 /* Begin XCBuildConfiguration section */
 		1DC4B06E6B26B503308C2363 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D766CFEDE0C2BEFA022A6C4D /* Pods-HybridApp.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -195,6 +328,7 @@
 					"-ObjC",
 					"-lc++",
 				);
+				OTHER_SWIFT_FLAGS = "$(inherited) -D EXPO_CONFIGURATION_DEBUG";
 				PRODUCT_BUNDLE_IDENTIFIER = com.tuniu.hybrid;
 				PRODUCT_NAME = HybridApp;
 				SDKROOT = iphoneos;
@@ -205,6 +339,7 @@
 		};
 		41332DA55FC33D831129849B /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 27F1F3BA1761F368980A4E84 /* Pods-HybridApp.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -221,6 +356,7 @@
 					"-ObjC",
 					"-lc++",
 				);
+				OTHER_SWIFT_FLAGS = "$(inherited) -D EXPO_CONFIGURATION_RELEASE";
 				PRODUCT_BUNDLE_IDENTIFIER = com.tuniu.hybrid;
 				PRODUCT_NAME = HybridApp;
 				SDKROOT = iphoneos;
@@ -268,6 +404,7 @@
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = i386;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -279,10 +416,18 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
+				OTHER_CFLAGS = "$(inherited)";
+				OTHER_CPLUSPLUSFLAGS = "$(inherited)";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					" ",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				REACT_NATIVE_PATH = "${PODS_ROOT}/../../taro/node_modules/react-native";
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
+				USE_HERMES = true;
 			};
 			name = Release;
 		};
@@ -324,6 +469,7 @@
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = i386;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -342,10 +488,18 @@
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_CFLAGS = "$(inherited)";
+				OTHER_CPLUSPLUSFLAGS = "$(inherited)";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					" ",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				REACT_NATIVE_PATH = "${PODS_ROOT}/../../taro/node_modules/react-native";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
+				USE_HERMES = true;
 			};
 			name = Debug;
 		};

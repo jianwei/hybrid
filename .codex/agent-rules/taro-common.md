@@ -11,4 +11,4 @@
 ## 验证
 
 - 在仓库根目录运行 `pnpm typecheck` 和 `pnpm lint`；按 `apps/taro/package.json` 中目标平台的脚本分别构建，并在目标环境验证。脚本存在不等于平台已可用。
-- `apps/taro/dist/` 由各平台构建共用；检查产物前确认最后一次构建的目标平台。共享代码变更需验证所有受影响的平台。
+- 构建产物直接按交付平台写入仓库根目录 `dist/<平台>/`（如 `dist/h5/`、`dist/weapp/`），不增加 `taro` 层级；通用 RN Android 产物写入 `dist/rn/android/`，iOS 宿主消费的 RN bundle 写入 `dist/ios/bundle/`。不同平台不得共用或清空同一个输出目录。共享代码变更需验证所有受影响的平台。

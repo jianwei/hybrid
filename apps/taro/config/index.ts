@@ -16,7 +16,7 @@ export default defineConfig<'webpack5'>(async (merge) => {
       828: 1.81 / 2
     },
     sourceRoot: 'src',
-    outputRoot: 'dist',
+    outputRoot: `../../dist/${process.env.TARO_ENV ?? 'h5'}`,
     plugins: [
       "@tarojs/plugin-generator"
     ],
@@ -95,8 +95,10 @@ export default defineConfig<'webpack5'>(async (merge) => {
     rn: {
       appName: 'HybridApp',
       output: {
-        ios: '../ios/bundle/main.jsbundle',
-        iosAssetsDest: '../ios/bundle'
+        ios: '../../dist/ios/bundle/main.jsbundle',
+        iosAssetsDest: '../../dist/ios/bundle',
+        android: '../../dist/rn/android/index.android.bundle',
+        androidAssetsDest: '../../dist/rn/android'
       },
       postcss: {
         cssModules: {

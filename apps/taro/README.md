@@ -48,13 +48,13 @@ apps/taro/
 
 公共构建配置位于 `config/index.ts`，开发与生产差异分别位于 `config/dev.ts` 和 `config/prod.ts`。源码别名 `@` 指向 `src/`。
 
-H5 和各小程序平台共用 `apps/taro/dist/`。切换目标平台前需要重新构建，后一次构建会覆盖前一次产物。
+H5 和各小程序平台按 `TARO_ENV` 直接输出到仓库根目录 `dist/<平台>/`，例如 `dist/h5/`、`dist/weapp/`，不增加 `taro` 层级。开发 watch 使用同样的目录；不同平台构建互不覆盖。
 
 H5 使用 History 路由，页面地址不包含 `#`。部署时需要把不存在的文件路径回退到 `index.html`，否则直接访问或刷新子页面会返回 404；静态资源路径不应被回退。
 
 ## iOS React Native
 
-`pnpm dev:ios` 启动 Taro Metro；`pnpm build:ios` 生成 `apps/ios/bundle/main.jsbundle` 与图片资源，不覆盖 H5/小程序的 `dist/`。`rn.appName` 必须与原生宿主的 `HybridApp` 模块名一致。
+`pnpm dev:ios` 启动 Taro Metro；`pnpm build:ios` 生成根目录下的 `dist/ios/bundle/main.jsbundle` 与图片资源，供 iOS 宿主使用。`pnpm build:ios:app` 继续生成原生模拟器 App。`rn.appName` 必须与原生宿主的 `HybridApp` 模块名一致。通用 `build:rn` 的 Android 产物写入 `dist/rn/android/`。
 
 `index.js` 与 `metro.config.js` 接入 Taro RN 编译器；Metro 的 `watchFolders` 覆盖 workspace 根目录以解析 pnpm 符号链接。iOS 构建脚本直接调用与 Taro 4.2.1 runner 相同的 RN bundle 命令，仍通过 Taro Metro transformer 编译，以确保构建失败能返回非零退出码。
 
@@ -62,7 +62,7 @@ H5 使用 History 路由，页面地址不包含 `#`。部署时需要把不存�
 
 ## 微信小程序 AppID
 
-`project.config.json` 当前使用 Taro 模板占位值 `touristappid`，三个 `.env.*` 文件也只有 `TARO_APP_ID` 的注释示例。进行正式微信小程序调试或发布前，应在对应环境文件中配置有效的 `TARO_APP_ID`，然后重新构建并使用微信开发者工具打开 `apps/taro/`。
+`project.config.json` 当前使用 Taro 模板占位值 `touristappid`，三个 `.env.*` 文件也只有 `TARO_APP_ID` 的注释示例。进行正式微信小程序调试或发布前，应在对应环境文件中配置有效的 `TARO_APP_ID`，然后重新构建并使用微信开发者工具打开 `dist/weapp/`。构建会在产物中生成 `miniprogramRoot: './'` 的项目配置；源码项目配置也已指向该产物目录。
 
 ## 依赖兼容范围
 

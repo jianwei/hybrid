@@ -31,7 +31,7 @@
     "dev:harmony-hybrid": "pnpm run build:harmony-hybrid --watch",
     "typecheck": "tsc --noEmit",
     "lint": "eslint src config --ext .ts,.tsx",
-    "build:rn:ios": "NODE_ENV=production TARO_ENV=rn react-native bundle --platform ios --dev false --entry-file index.js --bundle-output ../ios/bundle/main.jsbundle --assets-dest ../ios/bundle",
+    "build:rn:ios": "mkdir -p ../../dist/ios/bundle && NODE_ENV=production TARO_ENV=rn react-native bundle --platform ios --dev false --entry-file index.js --bundle-output ../../dist/ios/bundle/main.jsbundle --assets-dest ../../dist/ios/bundle",
     "dev:rn:ios": "taro build --type rn --platform ios --watch"
   },
   "browserslist": {

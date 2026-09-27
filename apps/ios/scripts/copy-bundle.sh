@@ -6,7 +6,7 @@ if [ "$CONFIGURATION" = "Debug" ]; then
   exit 0
 fi
 
-bundle_dir="$PROJECT_DIR/bundle"
+bundle_dir="$PROJECT_DIR/../../dist/ios/bundle"
 if [ ! -s "$bundle_dir/main.jsbundle" ]; then
   echo "error: 缺少 RN bundle，请先在仓库根目录运行 pnpm build:ios。" >&2
   exit 1

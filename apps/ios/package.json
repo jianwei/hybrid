@@ -5,6 +5,7 @@
   "description": "加载 Taro React Native 内容的 iOS 宿主",
   "scripts": {
     "bundle": "pnpm --filter taro run build:rn:ios",
+    "build": "pnpm run bundle && sh scripts/build-app.sh",
     "pods": "bundle exec pod install",
     "open": "open HybridApp.xcworkspace"
   }

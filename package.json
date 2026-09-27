@@ -10,6 +10,7 @@
     "lint": "pnpm --filter taro run lint",
     "dev:ios": "pnpm --filter taro run dev:rn:ios",
     "build:ios": "pnpm --filter @hybrid/ios run bundle",
+    "build:ios:app": "pnpm --filter @hybrid/ios run build",
     "ios:pods": "pnpm --filter @hybrid/ios run pods",
     "ios:open": "pnpm --filter @hybrid/ios run open"
   },

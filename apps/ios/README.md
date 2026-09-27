@@ -35,12 +35,17 @@ pnpm ios:open
 
 ```sh
 pnpm build:ios
+pnpm build:ios:app # 包含上面的 bundle 构建，生成 Release 模拟器 App
 pnpm ios:open
 ```
 
-`build:ios` 编译 `apps/taro` 页面，输出 `apps/ios/bundle/main.jsbundle` 和静态资源。Xcode 中编辑 scheme，将 Run 的 Build Configuration 设为 Release 后运行，或选择 Archive 归档。Release 从 App 内置 `main.jsbundle` 加载，不需要 Metro。
+`build:ios` 编译 `apps/taro` 页面，输出仓库根目录 `dist/ios/bundle/main.jsbundle` 和静态资源。`build:ios:app` 先更新 bundle，再调用 Xcode 生成 `dist/ios/app/Release-iphonesimulator/HybridApp.app`；这个 App 用于模拟器，不需要开发者签名。Xcode 的缓存与中间文件保存在根目录 `.cache/ios/DerivedData/`，脚本只在原生构建成功后同步 App 到 `dist`。
 
-构建阶段 `嵌入 Taro RN bundle` 会复制 bundle 和所有资源到 App。缺少 bundle 时会直接失败，并提示先执行 `pnpm build:ios`。修改页面后需重新生成 bundle，再构建 Release；生成文件不提交。`build:ios` 不生成 `.app` / `.ipa`，原生编译由 Xcode 完成。
+`apps/ios/build/generated/ios/` 是 RN/CocoaPods 按工具约定生成且由 Pods 引用的代码，不属于交付产物；不要单独删除该目录，否则需重新运行 `pnpm ios:pods`。
+
+在 Xcode 中编辑 scheme，将 Run 的 Build Configuration 设为 Release 后运行，或配置真机签名后选择 Archive 归档。Release 从 App 内置 `main.jsbundle` 加载，不需要 Metro。手动导出的 `.app`、`.xcarchive` 或 `.ipa` 也应保存在 `dist/ios/` 的对应子目录。
+
+构建阶段 `嵌入 Taro RN bundle` 从 `dist/ios/bundle/` 复制 bundle 和所有资源到 App。缺少 bundle 时会直接失败，并提示先执行 `pnpm build:ios`。修改页面后需重新生成 bundle，再构建 Release；生成文件不提交。`build:ios` 不生成 `.app` / `.ipa`；生成模拟器 App 使用 `build:ios:app`。
 
 ## 工程与配置
 
@@ -48,6 +53,7 @@ pnpm ios:open
 - `HybridApp.xcodeproj`、`HybridApp.xcworkspace`：应用 target、共享 scheme、Pods 入口。
 - `Podfile`、`Gemfile`：原生依赖和 CocoaPods 版本。
 - `scripts/copy-bundle.sh`：Release 内置 RN 产物。
+- `scripts/build-app.sh`：构建模拟器 App，并同步到根 `dist/ios/app/`。
 - `../taro/config/index.ts`：`rn.appName: HybridApp` 和 bundle 输出位置。
 - `../taro/react-native.config.js`：RN CLI 定位原生宿主。
 
