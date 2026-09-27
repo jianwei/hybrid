@@ -8,9 +8,10 @@
     "build:weapp": "pnpm --filter taro run build:weapp",
     "typecheck": "pnpm --filter taro run typecheck",
     "lint": "pnpm --filter taro run lint",
-    "dev:ios": "pnpm --filter taro run dev:rn:ios",
+    "dev:ios": "pnpm --filter @hybrid/ios run dev",
     "build:ios": "pnpm --filter @hybrid/ios run bundle",
     "build:ios:app": "pnpm --filter @hybrid/ios run build",
+    "build:ios:ipa": "pnpm --filter @hybrid/ios run ipa",
     "ios:pods": "pnpm --filter @hybrid/ios run pods",
     "ios:open": "pnpm --filter @hybrid/ios run open"
   },

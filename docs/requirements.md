@@ -12,9 +12,10 @@
 | Bundler | 未锁定版本 | 安装 `apps/ios/Gemfile` 声明的 Ruby 依赖。 |
 | CocoaPods | `1.16.2`，由 `apps/ios/Gemfile` 指定 | 安装 iOS 原生依赖。 |
 | Xcode（含 iOS SDK、iOS Simulator） | 未锁定具体版本 | 编译、调试和归档 `apps/ios/HybridApp.xcworkspace`；原生 App 最低支持 iOS 13.4。 |
+| Apple Developer 团队与签名材料 | 真机 IPA 构建时需要 Team ID、有效代码签名证书及覆盖目标设备的描述文件 | 签名并导出可安装在已注册真机上的 IPA。 |
 | Web 浏览器 | 未锁定具体版本 | 运行和调试 H5 页面。 |
 | 微信开发者工具 | 未锁定具体版本 | 调试或发布微信小程序；正式调试前需配置有效 AppID。 |
 
-按需安装对应目标平台的软件：H5 使用浏览器，微信小程序使用微信开发者工具，iOS 宿主需要 macOS、Ruby 工具链和 Xcode。其他 Taro 平台虽有依赖或构建脚本，实际开发工具与可用性尚未在本仓库确认。
+按需安装对应目标平台的软件：H5 使用浏览器，微信小程序使用微信开发者工具，iOS 模拟器宿主需要 macOS、Ruby 工具链和 Xcode；真机 IPA 还需要 Apple Developer 团队与签名材料。其他 Taro 平台虽有依赖或构建脚本，实际开发工具与可用性尚未在本仓库确认。
 
 新增、升级或移除本机或目标平台所需软件时，同步更新本文。具体安装和构建步骤见 [仓库说明](../README.md)、[Taro 应用说明](../apps/taro/README.md) 与 [iOS 宿主说明](../apps/ios/README.md)。

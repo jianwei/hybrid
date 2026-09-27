@@ -319,6 +319,7 @@
 				CLANG_ENABLE_OBJC_WEAK = NO;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				HYBRID_BUNDLE_IDENTIFIER = com.tuniu.hybrid;
 				INFOPLIST_FILE = HybridApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -329,7 +330,7 @@
 					"-lc++",
 				);
 				OTHER_SWIFT_FLAGS = "$(inherited) -D EXPO_CONFIGURATION_DEBUG";
-				PRODUCT_BUNDLE_IDENTIFIER = com.tuniu.hybrid;
+				PRODUCT_BUNDLE_IDENTIFIER = "$(HYBRID_BUNDLE_IDENTIFIER)";
 				PRODUCT_NAME = HybridApp;
 				SDKROOT = iphoneos;
 				SWIFT_VERSION = 5.0;
@@ -347,6 +348,7 @@
 				CLANG_ENABLE_OBJC_WEAK = NO;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				HYBRID_BUNDLE_IDENTIFIER = com.tuniu.hybrid;
 				INFOPLIST_FILE = HybridApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -357,7 +359,7 @@
 					"-lc++",
 				);
 				OTHER_SWIFT_FLAGS = "$(inherited) -D EXPO_CONFIGURATION_RELEASE";
-				PRODUCT_BUNDLE_IDENTIFIER = com.tuniu.hybrid;
+				PRODUCT_BUNDLE_IDENTIFIER = "$(HYBRID_BUNDLE_IDENTIFIER)";
 				PRODUCT_NAME = HybridApp;
 				SDKROOT = iphoneos;
 				SWIFT_VERSION = 5.0;
