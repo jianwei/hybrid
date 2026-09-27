@@ -50,6 +50,8 @@ apps/taro/
 
 H5 和各小程序平台共用 `apps/taro/dist/`。切换目标平台前需要重新构建，后一次构建会覆盖前一次产物。
 
+H5 使用 History 路由，页面地址不包含 `#`。部署时需要把不存在的文件路径回退到 `index.html`，否则直接访问或刷新子页面会返回 404；静态资源路径不应被回退。
+
 ## 微信小程序 AppID
 
 `project.config.json` 当前使用 Taro 模板占位值 `touristappid`，三个 `.env.*` 文件也只有 `TARO_APP_ID` 的注释示例。进行正式微信小程序调试或发布前，应在对应环境文件中配置有效的 `TARO_APP_ID`，然后重新构建并使用微信开发者工具打开 `apps/taro/`。

@@ -29,7 +29,17 @@ export default defineConfig<'webpack5'>(async (merge) => {
       }
     },
     framework: 'react',
-    compiler: 'webpack5',
+    compiler: {
+      type: 'webpack5',
+      prebundle: {
+        esbuild: {
+          logOverride: {
+            // Stencil 运行时动态导入 entry 会触发 esbuild empty-glob 误报，仅覆盖该诊断
+            'empty-glob': 'silent'
+          }
+        }
+      }
+    },
     cache: {
       enable: false
     },
@@ -55,6 +65,9 @@ export default defineConfig<'webpack5'>(async (merge) => {
     },
     h5: {
       publicPath: '/',
+      router: {
+        mode: 'browser'
+      },
       staticDirectory: 'static',
       output: {
         filename: 'js/[name].[fullhash:8].js',
