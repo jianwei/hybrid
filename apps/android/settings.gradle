@@ -1,0 +1,26 @@
+import java.nio.file.Files
+
+// JS 工程位于同级的 apps/taro，依赖由 pnpm 安装在其 node_modules 中。
+def taroDir = rootDir.toPath().resolveSibling('taro').toFile()
+
+// Expo autolinking 等脚本以本工程目录为 cwd 解析 node 模块，建立指向 apps/taro/node_modules 的软链。
+// 软链不提交；仅在缺失或链接损坏（目标不存在）时创建。
+def nodeModules = rootDir.toPath().resolve('node_modules')
+if (!Files.exists(nodeModules)) {
+    Files.deleteIfExists(nodeModules)
+    Files.createSymbolicLink(nodeModules, taroDir.toPath().resolve('node_modules'))
+}
+
+rootProject.name = 'HybridApp'
+
+// RN 0.73 官方自动链接脚本（cli-platform-android 12.3.7 原样复制），仓库内副本仅以 apps/taro 为 JS 根执行 react-native config。
+apply from: file('scripts/native_modules.gradle')
+applyNativeModulesSettingsGradle(settings)
+
+// Expo 模块自动链接，对应 iOS Podfile 的 use_expo_modules!，模块从 apps/taro/node_modules 搜索。
+def expoAutolinking = ["node", "--print", "require.resolve('expo-modules-autolinking/package.json', { paths: [require.resolve('expo/package.json')] })"].execute(null, taroDir).text.trim()
+apply from: new File(expoAutolinking, '../scripts/android/autolinking_implementation.gradle')
+useExpoModules(searchPaths: [new File(taroDir, 'node_modules').absolutePath])
+
+include ':app'
+includeBuild(new File(["node", "--print", "require.resolve('@react-native/gradle-plugin/package.json', { paths: [require.resolve('react-native/package.json')] })"].execute(null, taroDir).text.trim()).parentFile.toPath().toRealPath().toFile())

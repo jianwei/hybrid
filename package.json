@@ -13,7 +13,10 @@
     "build:ios:app": "pnpm --filter @hybrid/ios run build",
     "build:ios:ipa": "pnpm --filter @hybrid/ios run ipa",
     "ios:pods": "pnpm --filter @hybrid/ios run pods",
-    "ios:open": "pnpm --filter @hybrid/ios run open"
+    "ios:open": "pnpm --filter @hybrid/ios run open",
+    "dev:android": "pnpm --filter @hybrid/android run dev",
+    "build:android": "pnpm --filter @hybrid/android run bundle",
+    "build:android:apk": "pnpm --filter @hybrid/android run build"
   },
   "engines": {
     "node": ">=24.11.0"

@@ -1,0 +1,39 @@
+buildscript {
+    ext {
+        buildToolsVersion = "34.0.0"
+        minSdkVersion = 21
+        compileSdkVersion = 34
+        targetSdkVersion = 34
+        ndkVersion = "25.1.8937393"
+        kotlinVersion = "1.8.0"
+    }
+    repositories {
+        maven { url 'https://maven.aliyun.com/repository/public' }
+        maven { url 'https://maven.aliyun.com/repository/google' }
+        maven { url 'https://maven.aliyun.com/repository/gradle-plugin' }
+        google()
+        mavenCentral()
+    }
+    dependencies {
+        classpath("com.android.tools.build:gradle")
+        classpath("com.facebook.react:react-native-gradle-plugin")
+        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin")
+    }
+}
+
+// 部分第三方库（如 @react-native-community/geolocation）按此属性定位 react-native 的 Android 目录；
+// 实际依赖版本由 RN Gradle Plugin 统一替换为 Maven Central 的 react-android。
+ext.reactNativeAndroidRoot = file("${rootDir}/../taro/node_modules/react-native/android")
+
+allprojects {
+    // 原生构建中间文件统一放入根目录 .cache/android/；交付物由脚本复制到 dist/rn/android/。
+    buildDir = "${rootDir}/../../.cache/android/build/${project.name}"
+    repositories {
+        maven {
+            // expo-camera 内置自定义 com.google.android:cameraview
+            url "${rootDir}/../taro/node_modules/expo-camera/android/maven"
+        }
+    }
+}
+
+apply plugin: "com.facebook.react.rootproject"

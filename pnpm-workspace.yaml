@@ -18,3 +18,11 @@ peerDependencyRules:
     "@ant-design/react-native@5.0.0>@react-native-picker/picker": "2.6.1"
     "@ant-design/react-native@5.0.0>react-native-gesture-handler": "2.14.1"
     "@react-native-community/cameraroll@4.1.2>react": "18.2.0"
+
+# Taro RN 的 babel/stylelint 插件由 @tarojs/rn-supporter 以裸包名注入，babel/stylelint 会从
+# 被转换文件所在目录向上解析；提升到根 node_modules 后，apps/taro 下的源文件也能解析到。
+publicHoistPattern:
+  - babel-plugin-transform-react-jsx-to-rn-stylesheet
+  - babel-plugin-global-define
+  - babel-plugin-jsx-attributes-array-to-object
+  - stylelint-config-taro-rn

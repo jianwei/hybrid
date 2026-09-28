@@ -109,6 +109,8 @@ importers:
 
   .: {}
 
+  apps/android: {}
+
   apps/ios: {}
 
   apps/taro:

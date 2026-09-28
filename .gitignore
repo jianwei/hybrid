@@ -28,3 +28,11 @@ node_modules/
 # 全仓构建交付物和构建缓存
 /dist/
 /.cache/
+
+# Android 宿主本机配置与 Gradle 工程缓存
+apps/android/local.properties
+apps/android/.gradle/
+# settings.gradle 自动创建的 node_modules 软链
+apps/android/node_modules
+# Gradle 9 意外生成的工程级报告目录（构建中间文件实际在 .cache/android/）
+apps/android/build/

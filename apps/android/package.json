@@ -1,0 +1,11 @@
+{
+  "name": "@hybrid/android",
+  "version": "1.0.0",
+  "private": true,
+  "description": "加载 Taro React Native 内容的 Android 宿主",
+  "scripts": {
+    "dev": "node scripts/dev-app.mjs",
+    "bundle": "pnpm --filter taro run build:rn:android",
+    "build": "pnpm run bundle && sh scripts/build-apk.sh"
+  }
+}
