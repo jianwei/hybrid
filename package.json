@@ -9,6 +9,7 @@
     "build:harmony": "pnpm --filter taro run build:harmony",
     "build:harmony:app": "pnpm --filter @hybrid/harmonyos run build",
     "dev:harmony": "pnpm --filter @hybrid/harmonyos run dev",
+    "dev:harmony:noWindow": "pnpm --filter @hybrid/harmonyos run dev:noWindow",
     "typecheck": "pnpm --filter taro run typecheck",
     "lint": "pnpm --filter taro run lint",
     "dev:ios": "pnpm --filter @hybrid/ios run dev",

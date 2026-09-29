@@ -51,8 +51,8 @@ function run(command, args, options = {}) {
 async function findClt() {
   const candidates = [
     process.env.HARMONY_CLT,
-    join(homedir(), 'Downloads/command-line-tools'),
-    join(homedir(), 'command-line-tools')
+    join(homedir(), 'command-line-tools'),
+    join(homedir(), 'Downloads/command-line-tools')
   ].filter(Boolean)
   for (const dir of candidates) {
     const found = await access(join(dir, 'bin/hvigorw')).then(() => true, () => false)
@@ -79,9 +79,11 @@ async function onlineDevices(hdc) {
  * @returns {Promise<string>} 已就绪设备的连接地址。
  */
 async function bootEmulator(hdc, emulatorBin) {
-  console.log(`启动鸿蒙模拟器：${emulatorName}`)
+  // --noWindow 供自动化测试使用：不弹窗口，只通过 hdc/截图验证。
+  const noWindow = process.argv.includes('--noWindow')
+  console.log(`启动鸿蒙模拟器：${emulatorName}${noWindow ? '（无窗口模式）' : ''}`)
   // 模拟器独立于本命令存活，不随脚本退出而关闭。
-  const child = spawn(emulatorBin, ['-start', emulatorName], { stdio: 'ignore', detached: true })
+  const child = spawn(emulatorBin, ['-start', emulatorName, ...(noWindow ? ['-noWindow'] : [])], { stdio: 'ignore', detached: true })
   child.unref()
   const deadline = Date.now() + 240_000
   while (Date.now() < deadline) {

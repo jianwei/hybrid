@@ -7,7 +7,7 @@
 **不需要安装 DevEco Studio**。整条链路用华为 Command Line Tools（mac-arm64 26.0.0+，含 HarmonyOS SDK、ohpm、hvigor、hdc、Emulator）完成，版本要求见 [软件要求](../../docs/requirements.md)。
 
 ```sh
-# 解压 Command Line Tools 后，把解压目录告诉脚本（默认探测 ~/Downloads/command-line-tools）
+# 解压 Command Line Tools 后放到 ~/command-line-tools（脚本默认探测，防止误删也可用 HARMONY_CLT 指定其他位置）
 export HARMONY_CLT=/path/to/command-line-tools
 
 # 仓库根目录
@@ -31,7 +31,8 @@ pnpm dev:harmony
 ```sh
 pnpm build:harmony      # 仅编译 Taro 页面，注入 apps/harmonyos/entry
 pnpm build:harmony:app  # 包含上面的编译，再经 ohpm + hvigor 生成 HAP
-pnpm dev:harmony        # 编译 + 组装 + 启动/复用模拟器 + hdc 安装并拉起应用
+pnpm dev:harmony        # 编译 + 组装 + 启动/复用模拟器（带窗口）+ hdc 安装并拉起应用
+pnpm dev:harmony:noWindow  # 同上，但模拟器以无窗口模式启动（自动化测试用）
 ```
 
 `build:harmony:app` 输出 `dist/harmony/app/HybridApp-debug.hap`（未签名，仅供模拟器）。`dev:harmony` 复用已在线的 hdc 设备，否则后台启动 `HybridOS_Phone` 模拟器（可用 `HARMONY_EMULATOR=名字` 指定其他模拟器）；鸿蒙端为静态打包，修改 `apps/taro/src` 后需重新执行命令。

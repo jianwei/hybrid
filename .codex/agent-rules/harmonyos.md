@@ -4,11 +4,12 @@ HarmonyOS 宿主位于 `apps/harmonyos`（Stage 模型，最低兼容 API 14，�
 
 ## 构建与运行
 
-不安装 DevEco Studio，使用华为 Command Line Tools（`HARMONY_CLT` 指向解压目录，默认探测 `~/Downloads/command-line-tools`）。在仓库根目录执行：
+不安装 DevEco Studio，使用华为 Command Line Tools（`HARMONY_CLT` 指向解压目录，默认依次探测 `~/command-line-tools`、`~/Downloads/command-line-tools`）。在仓库根目录执行：
 
 - `pnpm build:harmony`：编译 Taro 页面（Vite），注入 `apps/harmonyos/entry/src/main/ets/` 并复制运行时 HAR 到 `apps/harmonyos/static/`；此步骤不需要鸿蒙环境。
 - `pnpm build:harmony:app`：先执行上面的编译，再经 ohpm + hvigor 生成未签名 HAP，输出 `dist/harmony/app/HybridApp-debug.hap`。
-- `pnpm dev:harmony`：完整调试链路——编译、组装 HAP、启动/复用 `HybridOS_Phone` 模拟器（`HARMONY_EMULATOR` 可指定其他）、hdc 安装并 `aa start -b com.tuniu.hybrid -a app -m default` 拉起应用。
+- `pnpm dev:harmony`：完整调试链路——编译、组装 HAP、启动/复用 `HybridOS_Phone` 模拟器（带窗口，`HARMONY_EMULATOR` 可指定其他）、hdc 安装并 `aa start -b com.tuniu.hybrid -a app -m default` 拉起应用。
+- `pnpm dev:harmony:noWindow`：同上，但模拟器以 `-noWindow` 无窗口模式启动，供自动化测试使用（通过 hdc/截图验证）。
 - `pnpm --filter taro run dev:harmony`：watch 模式持续编译注入（鸿蒙端为静态打包，页面变更后仍需重新组装安装才能生效）。
 
 `apps/harmonyos` 下的 `entry/src/main/ets/`、`entry/src/main/resources/rawfile/`、`static/`、`oh_modules/`、`build/` 均为生成内容，不提交。模拟器安装未签名 HAP 即可调试；真机与发布才需要华为开发者账号和签名材料（hap-sign-tool.jar 在 `$HARMONY_CLT/sdk/default/openharmony/toolchains/lib/`）。

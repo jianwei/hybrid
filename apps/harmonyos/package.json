@@ -6,6 +6,7 @@
   "scripts": {
     "bundle": "pnpm --filter taro run build:harmony",
     "build": "sh scripts/build-app.sh",
-    "dev": "node scripts/dev-app.mjs"
+    "dev": "node scripts/dev-app.mjs",
+    "dev:noWindow": "node scripts/dev-app.mjs --noWindow"
   }
 }

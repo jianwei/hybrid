@@ -9,7 +9,7 @@ output_dir="$repo_dir/dist/harmony/app"
 # Emulator 依赖中文 locale，否则会拒绝启动（仅限中国大陆能力）。
 export LANG=zh_CN.UTF-8 LC_ALL=zh_CN.UTF-8
 if [ -z "${HARMONY_CLT:-}" ]; then
-  for candidate in "$HOME/Downloads/command-line-tools" "$HOME/command-line-tools"; do
+  for candidate in "$HOME/command-line-tools" "$HOME/Downloads/command-line-tools"; do
     if [ -x "$candidate/bin/hvigorw" ]; then
       HARMONY_CLT="$candidate"
       break

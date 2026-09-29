@@ -80,7 +80,8 @@ pnpm build:android:apk # 编译 bundle，再生成内嵌 bundle 的 Release APK
 ```sh
 pnpm build:harmony     # 编译 Taro 页面（Vite），注入 apps/harmonyos/entry；无需鸿蒙环境
 pnpm build:harmony:app # 包含上面的编译，再经 ohpm + hvigor 生成 HAP
-pnpm dev:harmony       # 编译 + 组装 HAP + 启动/复用模拟器 + 安装并拉起应用
+pnpm dev:harmony       # 编译 + 组装 HAP + 启动/复用模拟器（带窗口）+ 安装并拉起应用
+pnpm dev:harmony:noWindow # 同上，无窗口模式启动模拟器（自动化测试用）
 ```
 
 模拟器安装未签名 HAP 即可调试，不需要华为开发者账号；真机与发布才需要签名材料。鸿蒙端为静态打包，修改 `apps/taro/src` 后重新执行 `pnpm dev:harmony`。
