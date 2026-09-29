@@ -40,7 +40,7 @@ pnpm dev:harmony        # 编译 + 组装 + 启动/复用模拟器 + hdc 安装�
 
 ```sh
 Emulator -list                                        # 列出已创建的模拟器
-Emulator -start HybridOS_Phone -noWindow              # 后台启动（无窗口）
+Emulator -start HybridOS_Phone                        # 后台启动（带窗口；追加 -noWindow 可无窗口运行）
 hdc list targets                                      # 确认设备上线（hdc 在 sdk/default/openharmony/toolchains/）
 hdc install -r dist/harmony/app/HybridApp-debug.hap   # 安装/覆盖安装
 hdc shell aa start -b com.tuniu.hybrid -a app -m default   # 拉起应用

@@ -79,9 +79,9 @@ async function onlineDevices(hdc) {
  * @returns {Promise<string>} 已就绪设备的连接地址。
  */
 async function bootEmulator(hdc, emulatorBin) {
-  console.log(`启动鸿蒙模拟器：${emulatorName}（无窗口模式）`)
+  console.log(`启动鸿蒙模拟器：${emulatorName}`)
   // 模拟器独立于本命令存活，不随脚本退出而关闭。
-  const child = spawn(emulatorBin, ['-start', emulatorName, '-noWindow'], { stdio: 'ignore', detached: true })
+  const child = spawn(emulatorBin, ['-start', emulatorName], { stdio: 'ignore', detached: true })
   child.unref()
   const deadline = Date.now() + 240_000
   while (Date.now() < deadline) {
