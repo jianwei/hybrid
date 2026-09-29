@@ -1,0 +1,11 @@
+{
+  "name": "@hybrid/harmonyos",
+  "version": "1.0.0",
+  "private": true,
+  "description": "加载 Taro 编译内容的 HarmonyOS 宿主（Stage 模型）",
+  "scripts": {
+    "bundle": "pnpm --filter taro run build:harmony",
+    "build": "sh scripts/build-app.sh",
+    "dev": "node scripts/dev-app.mjs"
+  }
+}

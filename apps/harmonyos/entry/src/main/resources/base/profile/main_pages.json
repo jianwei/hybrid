@@ -1,0 +1,9 @@
+{
+  "src": [
+    "pages/index/index"
+  ],
+  "window": {
+    "designWidth": 750,
+    "autoDesignWidth": false
+  }
+}

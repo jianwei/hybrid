@@ -1,13 +1,14 @@
 # Hybrid
 
-Hybrid 是使用 pnpm workspace 管理的 monorepo。共享页面位于 `apps/taro`，iOS 原生宿主位于 `apps/ios`，Android 原生宿主位于 `apps/android`。
+Hybrid 是使用 pnpm workspace 管理的 monorepo。共享页面位于 `apps/taro`，iOS 原生宿主位于 `apps/ios`，Android 原生宿主位于 `apps/android`，HarmonyOS 原生宿主位于 `apps/harmonyos`。
 
 ```text
 hybrid/
 ├── apps/
 │   ├── taro/               # Taro React 应用与 RN 依赖
 │   ├── ios/                # 加载 RN 内容的 iOS 宿主 App
-│   └── android/            # 加载 RN 内容的 Android 宿主 App
+│   ├── android/            # 加载 RN 内容的 Android 宿主 App
+│   └── harmonyos/          # 承载 Taro 编译内容的 HarmonyOS 宿主 App
 ├── dist/                   # 一级子目录直接对应 App 或交付目标
 ├── .cache/                 # 原生等构建工具的缓存与中间文件
 ├── package.json            # 根命令与 Node、pnpm 版本约束
@@ -72,6 +73,18 @@ pnpm build:android:apk # 编译 bundle，再生成内嵌 bundle 的 Release APK
 
 `dev:android` 保持运行期间，修改 `apps/taro/src` 页面和样式会自动编译并刷新模拟器内的 App。原生代码改动后重新执行命令。可用 `ANDROID_AVD='Pixel_7_API_35' pnpm run dev:android` 指定虚拟设备或 adb 序列号，Ctrl-C 停止本次开发服务。详细行为见 [Debug 开发](apps/android/README.md#debug-开发)。
 
+## HarmonyOS 宿主
+
+采用 Taro C-API 方案（`harmony_cpp`）把 `apps/taro` 页面编译为鸿蒙原生应用，与 RN 链路无关。无需安装 DevEco Studio：首次按 [HarmonyOS 宿主说明](apps/harmonyos/README.md) 准备华为 Command Line Tools（含 SDK、ohpm、hvigor、hdc、Emulator）并用 `HARMONY_CLT` 指向解压目录，然后执行：
+
+```sh
+pnpm build:harmony     # 编译 Taro 页面（Vite），注入 apps/harmonyos/entry；无需鸿蒙环境
+pnpm build:harmony:app # 包含上面的编译，再经 ohpm + hvigor 生成 HAP
+pnpm dev:harmony       # 编译 + 组装 HAP + 启动/复用模拟器 + 安装并拉起应用
+```
+
+模拟器安装未签名 HAP 即可调试，不需要华为开发者账号；真机与发布才需要签名材料。鸿蒙端为静态打包，修改 `apps/taro/src` 后重新执行 `pnpm dev:harmony`。
+
 ## 构建产物
 
 所有交付物统一放在仓库根目录 `dist/<App 或交付目标>/`，一级子目录直接使用 `h5`、`weapp`、`ios` 等交付目标，不增加源码工程层级，各目标互不覆盖：
@@ -87,8 +100,11 @@ pnpm build:android:apk # 编译 bundle，再生成内嵌 bundle 的 Release APK
 | `pnpm build:android` | `dist/rn/android/index.android.bundle` 与资源 |
 | `pnpm run dev:android` | `dist/rn/android/app/debug/HybridApp-debug.apk`（运行时从 Metro 加载 JS） |
 | `pnpm build:android:apk` | `dist/rn/android/`、`dist/rn/android/app/release/HybridApp.apk` |
+| `pnpm build:harmony` | 注入 `apps/harmonyos/entry/src/main/ets/`（不经 `dist/`） |
+| `pnpm build:harmony:app` | `dist/harmony/app/HybridApp-debug.hap`（未签名，供模拟器） |
+| `pnpm dev:harmony` | 同上 HAP，并安装到鸿蒙模拟器运行 |
 
-其他 Taro 平台使用 `dist/<平台>/`。iOS 原生脚本把 Xcode 缓存保存在 `.cache/ios/`，Android 原生脚本把 Gradle 缓存与中间文件保存在 `.cache/android/`，成功后将原生产物复制到对应交付目录。`dist/` 和 `.cache/` 均不提交。
+其他 Taro 平台使用 `dist/<平台>/`。iOS 原生脚本把 Xcode 缓存保存在 `.cache/ios/`，Android 原生脚本把 Gradle 缓存与中间文件保存在 `.cache/android/`，鸿蒙脚本把构建日志保存在 `.cache/harmony/`，成功后将原生产物复制到对应交付目录。`dist/` 和 `.cache/` 均不提交。
 
 ## 工作区约定
 

@@ -13,6 +13,8 @@ minimumReleaseAgeExclude:
   - lint-staged@17.6.0
 
 # Taro 4.2.1 自带的 Ant Design RN 5.0 仍声明旧版 peer，按官方 RN 0.73 壳固定兼容范围。
+patchedDependencies:
+  '@tarojs/vite-runner@4.2.1': patches/@tarojs__vite-runner@4.2.1.patch
 peerDependencyRules:
   allowedVersions:
     "@ant-design/react-native@5.0.0>@react-native-picker/picker": "2.6.1"

@@ -34,5 +34,18 @@ apps/android/local.properties
 apps/android/.gradle/
 # settings.gradle 自动创建的 node_modules 软链
 apps/android/node_modules
+
+# HarmonyOS 宿主：Taro 编译注入产物、ohpm 依赖与 hvigor 中间文件
+apps/harmonyos/entry/src/main/ets/
+apps/harmonyos/entry/src/main/resources/rawfile/
+apps/harmonyos/static/
+apps/harmonyos/oh_modules/
+apps/harmonyos/**/oh_modules/
+apps/harmonyos/.hvigor/
+apps/harmonyos/**/build/
+apps/harmonyos/local.properties
+apps/harmonyos/.preview/
+# hvigor 误在仓库根目录运行时生成的缓存
+/.hvigor/
 # Gradle 9 意外生成的工程级报告目录（构建中间文件实际在 .cache/android/）
 apps/android/build/

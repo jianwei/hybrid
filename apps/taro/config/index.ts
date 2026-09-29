@@ -18,7 +18,8 @@ export default defineConfig<'webpack5'>(async (merge) => {
     sourceRoot: 'src',
     outputRoot: `../../dist/${process.env.TARO_ENV ?? 'h5'}`,
     plugins: [
-      "@tarojs/plugin-generator"
+      "@tarojs/plugin-generator",
+      "@tarojs/plugin-platform-harmony-cpp"
     ],
     defineConstants: {
     },
@@ -105,6 +106,14 @@ export default defineConfig<'webpack5'>(async (merge) => {
           enable: false, // 默认为 false，如需使用 css modules 功能，则设为 true
         }
       }
+    },
+    harmony: {
+      // @ts-expect-error -- 4.2.1 类型定义未声明 compiler 字段，但鸿蒙端运行时必需；升级 Taro 后若类型补全则移除此注释
+      compiler: 'vite',
+      // 鸿蒙端当前仅支持 Vite 编译（平台级配置，不影响 h5/小程序的 webpack5）
+      // 鸿蒙宿主工程（Stage 模型），Taro 页面编译注入其 entry HAP
+      projectPath: resolve(__dirname, '../../../apps/harmonyos'),
+      hapName: 'entry'
     }
   }
 

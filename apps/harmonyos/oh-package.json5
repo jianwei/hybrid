@@ -1,0 +1,10 @@
+{
+  "name": "hybridapp",
+  "version": "1.0.0",
+  "description": "加载 Taro 编译内容的 HarmonyOS 宿主",
+  "main": "",
+  "author": "",
+  "license": "MIT",
+  "modelVersion": "26.0.0",
+  "dependencies": {}
+}
