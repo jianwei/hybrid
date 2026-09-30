@@ -22,7 +22,7 @@
 | Android | Gradle 8.3、JDK 17、SDK 34、NDK 25.1、Kotlin 1.8 | `apps/android/build.gradle`、wrapper、`docs/requirements.md` |
 | iOS | 最低 13.4、Expo AppDelegate wrapper | `apps/ios/Podfile`、`apps/ios/HybridApp/AppDelegate.h` |
 | 架构 | 两端使用 Hermes，关闭新架构 | Podfile、`apps/android/gradle.properties` |
-| 严格依赖检查 | 项目安装规则要求 `--strict-peer-dependencies`；现有 peer 例外不包含 RN 降级 | `.codex/agent-rules/ios.md`、`pnpm-workspace.yaml` |
+| 严格依赖检查 | 项目安装规则要求 `--strict-peer-dependencies`；现有 peer 例外不包含 RN 降级 | `.agents/agent-rules/ios.md`、`pnpm-workspace.yaml` |
 
 当前 `components-rn`、`taro-rn`、`router-rn` 三个包的已安装元数据都声明 RN ^0.73.1；不能因为 `runtime-rn` 或 `rn-supporter` 的 RN peer 范围较宽就认为整套支持 0.72.5。
 

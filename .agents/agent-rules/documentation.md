@@ -16,4 +16,4 @@
 - 检查修改涉及的链接、示例、导航、资源和元数据。文档站任务执行其实际构建；构建无法执行时说明原因与已完成的检查，不将静态检查表述为构建通过。
 - 文档站产物与缓存目录遵循[项目输出约定](../PLATFORM_RULES.md)，新增软件要求同步到[软件要求](../../docs/requirements.md)。
 
-这些原则提炼自 [Rspress 文档生成 skill](../../.agents/skills/rspress-docs-generator/SKILL.md)、[最佳实践 skill](../../.agents/skills/rspress-best-practices/SKILL.md)与[摘要生成 skill](../../.agents/skills/rspress-description-generator/SKILL.md)；Rspress 专属操作按 [Rspress 规则](rspress.md) 执行。
+这些原则提炼自 [Rspress 文档生成 skill](../skills/rspress-docs-generator/SKILL.md)、[最佳实践 skill](../skills/rspress-best-practices/SKILL.md)与[摘要生成 skill](../skills/rspress-description-generator/SKILL.md)；Rspress 专属操作按 [Rspress 规则](rspress.md) 执行。

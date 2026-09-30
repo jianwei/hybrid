@@ -14,4 +14,4 @@
 - 核验受影响页面的布局、交互和样式；涉及暗色模式、响应式布局或多语言时，覆盖本次改动涉及的状态。
 - 修改共享组件时，明确受影响的平台，并按平台规则验证；以目标平台实际结果说明验证范围。
 
-以上定制优先级提炼自 [Rspress 主题 skill](../../.agents/skills/rspress-custom-theme/SKILL.md)；Rspress 的具体导入路径、变量与插槽仅按 [Rspress 规则](rspress.md) 使用。
+以上定制优先级提炼自 [Rspress 主题 skill](../skills/rspress-custom-theme/SKILL.md)；Rspress 的具体导入路径、变量与插槽仅按 [Rspress 规则](rspress.md) 使用。

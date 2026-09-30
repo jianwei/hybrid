@@ -4,13 +4,13 @@
 
 ## 读取入口
 
-开始任务时读取[最佳实践](../../.agents/skills/rspress-best-practices/SKILL.md)，并按任务读取下表对应的本地 skill 及其相关参考文件：
+开始任务时读取[最佳实践](../skills/rspress-best-practices/SKILL.md)，并按任务读取下表对应的本地 skill 及其相关参考文件：
 
 | 任务 | 必须读取 |
 | --- | --- |
-| 新建站点、维护功能文档或排查版本兼容 | [文档生成](../../.agents/skills/rspress-docs-generator/SKILL.md) |
-| 修改主题、布局、图标或全局组件 | [主题定制](../../.agents/skills/rspress-custom-theme/SKILL.md) |
-| 新增页面、补全摘要或修改页面摘要 | [摘要生成](../../.agents/skills/rspress-description-generator/SKILL.md) |
+| 新建站点、维护功能文档或排查版本兼容 | [文档生成](../skills/rspress-docs-generator/SKILL.md) |
+| 修改主题、布局、图标或全局组件 | [主题定制](../skills/rspress-custom-theme/SKILL.md) |
+| 新增页面、补全摘要或修改页面摘要 | [摘要生成](../skills/rspress-description-generator/SKILL.md) |
 
 ## 项目适配
 
