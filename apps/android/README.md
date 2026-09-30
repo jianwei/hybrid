@@ -1,17 +1,19 @@
 # Android 宿主 App
 
-`HybridApp` 是加载 `apps/taro` React Native 内容的原生 Android 宿主，最低支持 Android 5.0（API 21），目标 API 34，应用 ID `com.tuniu.hybrid`。原生结构沿用 [Taro 官方 RN 0.73 壳](https://github.com/NervJS/taro-native-shell/tree/0.73.0)的 Android 接入方式，使用 RN 0.73.11、Expo 50 和 Hermes，关闭新架构，不使用 Flipper。
+`HybridApp` 是加载 `apps/taro` React Native 内容的原生 Android 宿主，最低支持 Android 5.0（API 21），目标 API 34，应用 ID `com.tuniu.hybrid`。原生入口按 RN 0.72 的 `ReactNativeHost` 与 Expo SDK 49 接入，使用 RN 0.72.5、Expo 49 和 Hermes，关闭新架构，不使用 Flipper。
+
+RN 0.72.5 适配约束、首次切换清理步骤与验证范围见 [迁移验证](../../docs/react-native-0.72.5-migration.md)。
 
 ## 首次安装
 
-需要 JDK 17、Android SDK（Platform 34、Build-Tools 34、NDK 25.1.8937393、CMake 3.22.1、Platform-Tools、模拟器与 arm64 系统镜像）和至少一个 Android 虚拟设备（AVD），版本要求见 [软件要求](../../docs/requirements.md)。
+需要 JDK 17、Android SDK（Platform 34、Build-Tools 34 / 30.0.3、NDK 25.1.8937393、CMake 3.22.1、Platform-Tools、模拟器与 arm64 系统镜像）和至少一个 Android 虚拟设备（AVD），版本要求见 [软件要求](../../docs/requirements.md)。
 
 ```sh
 # 仓库根目录
 pnpm install --frozen-lockfile --strict-peer-dependencies
 ```
 
-JS 和原生库版本统一声明在 `apps/taro/package.json`；Gradle 通过仓库内脚本从该目录执行 RN 与 Expo 的 autolinking。SDK 位置按 `ANDROID_HOME` → `ANDROID_SDK_ROOT` → `~/Library/Android/sdk` → Homebrew 命令行工具目录（`/opt/homebrew/share/android-commandlinetools`）顺序解析。Gradle 8.3 由 wrapper 自动下载，distributionUrl 使用腾讯镜像（官方 services.gradle.org 在国内网络不可达）；`node_modules` 指向 `../taro/node_modules` 的软链由 `settings.gradle` 自动创建，无需手动维护。
+JS 和原生库版本统一声明在 `apps/taro/package.json`；Gradle 通过仓库内脚本从该目录执行 RN 与 Expo 的 autolinking。SDK 位置按 `ANDROID_HOME` → `ANDROID_SDK_ROOT` → `~/Library/Android/sdk` → Homebrew 命令行工具目录（`/opt/homebrew/share/android-commandlinetools`）顺序解析。Gradle 8.0.1 由 wrapper 自动下载，distributionUrl 使用腾讯镜像（官方 services.gradle.org 在国内网络不可达）；`node_modules` 指向 `../taro/node_modules` 的软链由 `settings.gradle` 自动创建，无需手动维护。
 
 ## Debug 开发
 
@@ -43,7 +45,7 @@ pnpm build:android:apk # 包含上面的 bundle 构建，再生成 Release APK
 ## 工程与配置
 
 - `settings.gradle`：monorepo 适配——创建 `node_modules` 软链、应用仓库内 `native_modules.gradle`、Expo 模块自动链接（`searchPaths` 指向 `apps/taro/node_modules`）、引入 RN Gradle Plugin。
-- `scripts/native_modules.gradle`：`@react-native-community/cli-platform-android` 12.3.7 原样复制，唯一改动是以 `apps/taro` 为 JS 根执行 `react-native config`（对应 iOS Podfile 的 `Dir.chdir(taro_root)`）。
+- `scripts/native_modules.gradle`：`@react-native-community/cli-platform-android` 11.3.7 副本（去除行尾空格），唯一改动是以 `apps/taro` 为 JS 根执行 `react-native config`（对应 iOS Podfile 的 `Dir.chdir(taro_root)`）。
 - `app/build.gradle`：`react {}` 指定 `root` / `reactNativeDir` / `codegenDir` / `entryFile` 到 `apps/taro`；签名、ABI 与构建类型。
 - `app/src/main/java/com/tuniu/hybrid/MainActivity.kt`：RN 模块名（与 `rn.appName` 一致）。
 - `app/src/main/java/com/tuniu/hybrid/MainApplication.kt`：RN 初始化、Expo `ReactNativeHostWrapper`、Hermes 开关。

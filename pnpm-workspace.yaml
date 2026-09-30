@@ -12,14 +12,47 @@ allowBuilds:
 minimumReleaseAgeExclude:
   - lint-staged@17.6.0
 
-# Taro 4.2.1 自带的 Ant Design RN 5.0 仍声明旧版 peer，按官方 RN 0.73 壳固定兼容范围。
+# Taro 4.2.1 自带的 Ant Design RN 5.0 仍声明旧版 peer，保留已验证的原生库兼容范围。
 patchedDependencies:
   '@tarojs/vite-runner@4.2.1': patches/@tarojs__vite-runner@4.2.1.patch
+  react-native@0.72.5: patches/react-native@0.72.5.patch
 peerDependencyRules:
   allowedVersions:
     "@ant-design/react-native@5.0.0>@react-native-picker/picker": "2.6.1"
     "@ant-design/react-native@5.0.0>react-native-gesture-handler": "2.14.1"
     "@react-native-community/cameraroll@4.1.2>react": "18.2.0"
+
+    # Taro 4.2.1 上游声明 RN 0.73 / Expo 50；此处仅接受本仓库适配的精确版本。
+    "@tarojs/components-rn@4.2.1>react-native": "0.72.5"
+    "@tarojs/components-rn@4.2.1>expo": "49.0.23"
+    "@tarojs/taro-rn@4.2.1>react-native": "0.72.5"
+    "@tarojs/taro-rn@4.2.1>expo": "49.0.23"
+    "@tarojs/router-rn@4.2.1>react-native": "0.72.5"
+    "@tarojs/rn-runner@4.2.1>react-native": "0.72.5"
+    "@tarojs/rn-runner@4.2.1>expo": "49.0.23"
+    "@tarojs/taro-rn@4.2.1>expo-av": "13.4.1"
+    "@tarojs/components-rn@4.2.1>expo-av": "13.4.1"
+    "@tarojs/taro-rn@4.2.1>expo-camera": "13.4.4"
+    "@tarojs/components-rn@4.2.1>expo-camera": "13.4.4"
+    "@tarojs/taro-rn@4.2.1>expo-barcode-scanner": "12.5.3"
+    "@tarojs/taro-rn@4.2.1>expo-brightness": "11.4.1"
+    "@tarojs/taro-rn@4.2.1>expo-file-system": "15.4.5"
+    "@tarojs/taro-rn@4.2.1>expo-image-picker": "14.3.2"
+    "@tarojs/taro-rn@4.2.1>expo-keep-awake": "12.3.0"
+    "@tarojs/taro-rn@4.2.1>expo-location": "16.1.0"
+    "@tarojs/taro-rn@4.2.1>expo-sensors": "12.3.0"
+
+# 已有宿主固定 RN 0.72.5；仅覆盖 Taro 4.2.1 的 RN 构建链，不影响其他目标。
+overrides:
+  '@react-native/metro-config@0.72.12>metro-config': '0.76.8'
+  '@react-native/metro-config@0.72.12>metro-runtime': '0.76.8'
+  '@tarojs/rn-supporter@4.2.1>@react-native-community/cli-config': '11.3.7'
+  '@tarojs/rn-supporter@4.2.1>@react-native-community/cli-tools': '11.3.7'
+  '@tarojs/rn-supporter@4.2.1>@react-native/metro-babel-transformer': 'npm:metro-react-native-babel-transformer@0.76.8'
+  '@tarojs/rn-supporter@4.2.1>metro': '0.76.8'
+  '@tarojs/rn-supporter@4.2.1>metro-cache': '0.76.8'
+  '@tarojs/rn-supporter@4.2.1>metro-core': '0.76.8'
+  '@tarojs/rn-supporter@4.2.1>metro-resolver': '0.76.8'
 
 # Taro RN 的 babel/stylelint 插件由 @tarojs/rn-supporter 以裸包名注入，babel/stylelint 会从
 # 被转换文件所在目录向上解析；提升到根 node_modules 后，apps/taro 下的源文件也能解析到。
@@ -28,3 +61,5 @@ publicHoistPattern:
   - babel-plugin-global-define
   - babel-plugin-jsx-attributes-array-to-object
   - stylelint-config-taro-rn
+  # Expo SDK 49 的 Ruby autolinking 脚本从项目根按裸包名解析。
+  - expo-modules-autolinking

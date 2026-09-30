@@ -143,7 +143,6 @@ class ReactNativeModules {
   private ArrayList<HashMap<String, String>> reactNativeModules
   private ArrayList<String> unstable_reactLegacyComponentNames
   private HashMap<String, ArrayList> reactNativeModulesBuildVariants
-  private String reactNativeVersion
 
   private static String LOG_PREFIX = ":ReactNative:"
 
@@ -151,12 +150,11 @@ class ReactNativeModules {
     this.logger = logger
     this.root = root
 
-    def (nativeModules, reactNativeModulesBuildVariants, androidProject, reactNativeVersion) = this.getReactNativeConfig()
+    def (nativeModules, reactNativeModulesBuildVariants, androidProject) = this.getReactNativeConfig()
     this.reactNativeModules = nativeModules
     this.reactNativeModulesBuildVariants = reactNativeModulesBuildVariants
     this.packageName = androidProject["packageName"]
     this.unstable_reactLegacyComponentNames = androidProject["unstable_reactLegacyComponentNames"]
-    this.reactNativeVersion = reactNativeVersion
   }
 
   /**
@@ -429,7 +427,6 @@ class ReactNativeModules {
     }
     def dependencies = json["dependencies"]
     def project = json["project"]["android"]
-    def reactNativeVersion = json["version"]
 
     if (project == null) {
       throw new Exception("React Native CLI failed to determine Android project configuration. This is likely due to misconfiguration. Config output:\n${json.toMapString()}")
@@ -475,7 +472,7 @@ class ReactNativeModules {
       }
     }
 
-    return [reactNativeModules, reactNativeModulesBuildVariants, json["project"]["android"], reactNativeVersion];
+    return [reactNativeModules, reactNativeModulesBuildVariants, json["project"]["android"]];
   }
 }
 
@@ -483,38 +480,29 @@ class ReactNativeModules {
 /*
  * Sometimes Gradle can be called outside of JavaScript hierarchy. Detect the directory
  * where build files of an active project are located.
- *
- * 与官方文件的唯一差异：monorepo 下 JS 根位于 Android 工程同级的 taro 目录，
- * react-native config 在该目录执行，使其读取 taro 的 package.json 与 react-native.config.js。
  */
+// monorepo 的 JS 根位于同级 taro 目录，React Native 配置需在该目录解析。
 def projectRoot = rootProject.projectDir.toPath().resolveSibling('taro').toFile()
 
 def autoModules = new ReactNativeModules(logger, projectRoot)
-
-def reactNativeVersionRequireNewArchEnabled(autoModules) {
-    def rnVersion = autoModules.reactNativeVersion
-    def regexPattern = /^(\d+)\.(\d+)\.(\d+)(?:-(\w+(?:[-.]\d+)?))?$/
-
-    if (rnVersion =~ regexPattern) {
-        def result = (rnVersion =~ regexPattern).findAll().first()
-
-        def major = result[1].toInteger()
-        if (major > 0 && major < 1000) {
-            return true
-        }
-    }
-    return false
-}
 
 /** -----------------------
  *    Exported Extensions
  * ------------------------ */
 
-ext.applyNativeModulesSettingsGradle = { DefaultSettings defaultSettings ->
+ext.applyNativeModulesSettingsGradle = { DefaultSettings defaultSettings, String root = null ->
+  if (root != null) {
+    logger.warn("${ReactNativeModules.LOG_PREFIX}Passing custom root is deprecated. CLI detects root automatically now.");
+    logger.warn("${ReactNativeModules.LOG_PREFIX}Please remove second argument to `applyNativeModulesSettingsGradle`.");
+  }
   autoModules.addReactNativeModuleProjects(defaultSettings)
 }
 
-ext.applyNativeModulesAppBuildGradle = { Project project ->
+ext.applyNativeModulesAppBuildGradle = { Project project, String root = null ->
+  if (root != null) {
+    logger.warn("${ReactNativeModules.LOG_PREFIX}Passing custom root is deprecated. CLI detects root automatically now");
+    logger.warn("${ReactNativeModules.LOG_PREFIX}Please remove second argument to `applyNativeModulesAppBuildGradle`.");
+  }
   autoModules.addReactNativeModuleDependencies(project)
 
   def generatedSrcDir = new File(buildDir, "generated/rncli/src/main/java")
@@ -536,9 +524,8 @@ ext.applyNativeModulesAppBuildGradle = { Project project ->
   }
 
   preBuild.dependsOn generatePackageList
-  def isNewArchEnabled = (project.hasProperty("newArchEnabled") && project.newArchEnabled == "true") ||
-    reactNativeVersionRequireNewArchEnabled(autoModules)
-  if (isNewArchEnabled) {
+
+  if (project.hasProperty("newArchEnabled") && project.newArchEnabled == "true") {
     preBuild.dependsOn generateNewArchitectureFiles
   }
 

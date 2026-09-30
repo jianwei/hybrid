@@ -26,7 +26,11 @@ const config = {
     // 不能误伤 node_modules 内合法的 dist 目录。
     blockList: [
       new RegExp(`^${escapeRegExp(repoRoot)}/\\.cache/`),
-      new RegExp(`^${escapeRegExp(repoRoot)}/dist/`)
+      new RegExp(`^${escapeRegExp(repoRoot)}/dist/`),
+      // 鸿蒙依赖包含同名 React 包，不能进入 RN 的 Haste 模块索引。
+      new RegExp(`^${escapeRegExp(repoRoot)}/apps/harmonyos/oh_modules/`),
+      // Pods/codegen 会在原生编译期间改写文件，避免 Metro 索引这些非 JS 构建输入。
+      new RegExp(`^${escapeRegExp(repoRoot)}/apps/ios/(Pods|build)/`)
     ]
   }
 }

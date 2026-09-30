@@ -1,6 +1,8 @@
 # iOS 宿主 App
 
-`HybridApp` 是加载 `apps/taro` React Native 内容的原生 iOS 宿主，最低支持 iOS 13.4。原生入口沿用 [Taro 官方 RN 0.73 壳](https://github.com/NervJS/taro-native-shell/tree/0.73.0) 的 `EXAppDelegateWrapper` 接入方式，使用 RN 0.73.11、Expo 50 和 Hermes，关闭新架构及 Flipper。
+`HybridApp` 是加载 `apps/taro` React Native 内容的原生 iOS 宿主，最低支持 iOS 13.4。原生入口使用 Expo SDK 49 的 `EXAppDelegateWrapper` 接入方式，使用 RN 0.72.5、Expo 49 和 Hermes，关闭新架构及 Flipper。
+
+RN 0.72.5 适配约束、首次切换清理步骤与验证范围见 [迁移验证](../../docs/react-native-0.72.5-migration.md)。
 
 ## 首次安装
 

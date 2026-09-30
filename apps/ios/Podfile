@@ -25,6 +25,15 @@ target 'HybridApp' do
 
   post_install do |installer|
     react_native_post_install(installer, config[:reactNativePath], :mac_catalyst_enabled => false)
+
+    # RN 0.72 的 Folly 未声明 clock_gettime；本工程 iOS 13.4 已支持该系统 API。
+    # 为所有包含 Folly 头文件的 Pod 保持一致，升级 RN/Folly 后重新核对此适配。
+    installer.pods_project.targets.each do |target|
+      target.build_configurations.each do |build_config|
+        definitions = build_config.build_settings['GCC_PREPROCESSOR_DEFINITIONS'] || ['$(inherited)']
+        build_config.build_settings['GCC_PREPROCESSOR_DEFINITIONS'] = Array(definitions) | ['FOLLY_HAVE_CLOCK_GETTIME=1']
+      end
+    end
   end
 
   post_integrate do |installer|

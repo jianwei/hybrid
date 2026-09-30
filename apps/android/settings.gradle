@@ -13,7 +13,7 @@ if (!Files.exists(nodeModules)) {
 
 rootProject.name = 'HybridApp'
 
-// RN 0.73 官方自动链接脚本（cli-platform-android 12.3.7 原样复制），仓库内副本仅以 apps/taro 为 JS 根执行 react-native config。
+// RN 0.72 官方自动链接脚本（cli-platform-android 11.3.7 原样复制），仓库内副本仅以 apps/taro 为 JS 根执行 react-native config。
 apply from: file('scripts/native_modules.gradle')
 applyNativeModulesSettingsGradle(settings)
 

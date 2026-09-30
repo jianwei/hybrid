@@ -77,6 +77,6 @@ dependencies {
     }
 }
 
-// RN 0.73 官方自动链接脚本（与 settings.gradle 使用同一仓库内副本），以 apps/taro 为 JS 根。
+// RN 0.72 官方自动链接脚本（与 settings.gradle 使用同一仓库内副本），以 apps/taro 为 JS 根。
 apply from: rootProject.file('scripts/native_modules.gradle')
 applyNativeModulesAppBuildGradle(project)

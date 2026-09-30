@@ -14,7 +14,7 @@
 | Xcode（含 iOS SDK、iOS Simulator） | 未锁定具体版本 | 编译、调试和归档 `apps/ios/HybridApp.xcworkspace`；原生 App 最低支持 iOS 13.4。 |
 | Apple Developer 团队与签名材料 | 真机 IPA 构建时需要 Team ID、有效代码签名证书及覆盖目标设备的描述文件 | 签名并导出可安装在已注册真机上的 IPA。 |
 | JDK | 17 | 运行 Gradle，编译 Android 原生代码。 |
-| Android Studio 或 Android SDK 命令行工具（含 Android SDK、Android Emulator） | SDK Platform `android-34`、Build-Tools `34.0.0`、NDK `25.1.8937393`、CMake `3.22.1`、Platform-Tools（adb）；Gradle 8.3 由工程 wrapper 自动下载 | 编译、调试和运行 `apps/android` 宿主；另需 arm64 系统镜像与至少一个 Android 虚拟设备（AVD）。 |
+| Android Studio 或 Android SDK 命令行工具（含 Android SDK、Android Emulator） | SDK Platform `android-34`、Build-Tools `34.0.0` 及旧原生依赖使用的 `30.0.3`、NDK `25.1.8937393`、CMake `3.22.1`、Platform-Tools（adb）；Gradle 8.0.1 由工程 wrapper 自动下载 | 编译、调试和运行 `apps/android` 宿主；另需 arm64 系统镜像与至少一个 Android 虚拟设备（AVD）。 |
 | 华为 Command Line Tools（含 HarmonyOS SDK、ohpm、hvigor、hdc、Emulator） | mac-arm64 `26.0.0.851`；SDK 为 HarmonyOS 26.0.0 Release（API 26），宿主最低兼容 API 14 | 编译和运行 `apps/harmonyos` 宿主，替代 DevEco Studio；通过 `HARMONY_CLT` 环境变量指向解压目录。 |
 | 华为开发者账号 | 仅真机调试与发布签名需要 | 申请调试证书与 Profile；模拟器安装未签名 HAP 即可调试，无需账号。 |
 | Web 浏览器 | 未锁定具体版本 | 运行和调试 H5 页面。 |
