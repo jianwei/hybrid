@@ -65,6 +65,7 @@ export default defineConfig<'webpack5'>(async (merge) => {
       }
     },
     h5: {
+      esnextModules: ['@taroify'],
       publicPath: '/',
       router: {
         mode: 'browser'

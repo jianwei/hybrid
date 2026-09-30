@@ -52,6 +52,18 @@ H5 和各小程序平台按 `TARO_ENV` 直接输出到仓库根目录 `dist/<平
 
 H5 使用 History 路由，页面地址不包含 `#`。部署时需要把不存在的文件路径回退到 `index.html`，否则直接访问或刷新子页面会返回 404；静态资源路径不应被回退。
 
+## Taroify
+
+H5 与微信小程序已接入 `@taroify/core` 1.0.6，并通过 Babel 自动按需引入组件及其 Sass 样式：
+
+```tsx
+import { Button } from '@taroify/core'
+
+<Button color="primary">提交</Button>
+```
+
+Taroify 官方支持范围为小程序与 H5，未声明支持 React Native。当前按需引入配置只对 H5 和微信小程序启用；参与 RN 或鸿蒙编译的共享源码不要引入 Taroify 组件。
+
 ## iOS React Native
 
 `pnpm run dev:ios` 启动 Taro Metro、打开模拟器，并构建安装最新 Debug App；保持运行即可在源码修改后 Fast Refresh。只启动 Metro 可使用 `pnpm --filter taro run dev:rn:ios`。`pnpm build:ios` 生成根目录下的 `dist/ios/bundle/main.jsbundle` 与图片资源，供 iOS 宿主使用。`pnpm build:ios:app` 继续生成原生模拟器 App。`rn.appName` 必须与原生宿主的 `HybridApp` 模块名一致。通用 `build:rn` 的 Android 产物写入 `dist/rn/android/`。
