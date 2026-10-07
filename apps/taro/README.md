@@ -14,10 +14,13 @@ pnpm dev:weapp
 
 pnpm typecheck
 pnpm lint
+pnpm --filter taro run lint:style
 
 pnpm build:h5
 pnpm build:weapp
 ```
+
+`pnpm lint` 同时检查 TypeScript/TSX 和自有 CSS/Sass；只检查样式时使用 `pnpm --filter taro run lint:style`。样式检查不扫描第三方依赖和构建产物。
 
 根目录提供 H5、微信小程序和 iOS 快捷命令。运行其他平台脚本时使用：
 
@@ -52,7 +55,7 @@ H5 和各小程序平台按 `TARO_ENV` 直接输出到仓库根目录 `dist/<平
 
 H5 使用 History 路由，页面地址不包含 `#`。部署时需要把不存在的文件路径回退到 `index.html`，否则直接访问或刷新子页面会返回 404；静态资源路径不应被回退。
 
-H5 以 375px 视口为设计基准，根字号在该视口为 16px，并随实际移动端视口等比变化；375px 是换算基准，不会锁定页面宽度。业务样式按 375px 设计稿使用 `px` 编写，构建时由 Taro 转成 `rem`（375px 视口下 `16px` 对应 `1rem`）。不要手工重复换算或注入另一套根字号脚本。Taroify 内置样式继续按组件库的 750px 基准换算，避免其 `$hd: 2` 尺寸被二次放大；具体规则见 [H5 规则](../../.agents/agent-rules/h5.md#尺寸与单位)。
+H5 以 375px 视口为设计基准，根字号在该视口为 16px，并随实际移动端视口等比变化；375px 是换算基准，不会锁定页面宽度。业务样式按 375px 设计稿使用 `px` 编写，构建时由 Taro 转成 `rem`（375px 视口下 `16px` 对应 `1rem`）。所有平台的业务样式源码均禁止百分比声明和非 `px` 长度单位，零值、无单位值及时间、角度等非长度单位按实际 CSS 语义保留；完整边界见 [UI 定制规则](../../.agents/agent-rules/ui-customization.md#css-尺寸与单位)。不要手工重复换算或注入另一套根字号脚本。Taroify 内置样式继续按组件库的 750px 基准换算，避免其 `$hd: 2` 尺寸被二次放大；H5 转换规则见 [H5 规则](../../.agents/agent-rules/h5.md#尺寸与单位)。
 
 ## Taroify
 
