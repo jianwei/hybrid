@@ -1,6 +1,6 @@
 # Hybrid
 
-Hybrid 是使用 pnpm workspace 管理的 monorepo。共享页面位于 `apps/taro`，iOS 原生宿主位于 `apps/ios`，Android 原生宿主位于 `apps/android`，HarmonyOS 原生宿主位于 `apps/harmonyos`。
+Hybrid 是使用 pnpm workspace 管理的 monorepo。共享页面位于 `apps/taro`，iOS 原生宿主位于 `apps/ios`，Android 原生宿主位于 `apps/android`，HarmonyOS C-API 宿主位于 `apps/harmonyos`，鸿蒙 RN 宿主位于 `apps/harmonyos-rn`。
 
 ```text
 hybrid/
@@ -8,7 +8,8 @@ hybrid/
 │   ├── taro/               # Taro React 应用与 RN 依赖
 │   ├── ios/                # 加载 RN 内容的 iOS 宿主 App
 │   ├── android/            # 加载 RN 内容的 Android 宿主 App
-│   └── harmonyos/          # 承载 Taro 编译内容的 HarmonyOS 宿主 App
+│   ├── harmonyos/          # 承载 Taro 编译内容的 HarmonyOS 宿主 App
+│   └── harmonyos-rn/       # 加载共享 Taro RN 页面的独立鸿蒙宿主
 ├── dist/                   # 一级子目录直接对应 App 或交付目标
 ├── .cache/                 # 原生等构建工具的缓存与中间文件
 ├── package.json            # 根命令与 Node、pnpm 版本约束
@@ -86,6 +87,19 @@ pnpm dev:harmony:noWindow # 同上，无窗口模式启动模拟器（自动化�
 
 模拟器安装未签名 HAP 即可调试，不需要华为开发者账号；真机与发布才需要签名材料。鸿蒙端为静态打包，修改 `apps/taro/src` 后重新执行 `pnpm dev:harmony`。
 
+## HarmonyOS RN 宿主
+
+独立的 `apps/harmonyos-rn` 使用 RN 0.72.5 对应的 RNOH、Hermes 和 C-API，复用 `apps/taro` 页面及 RN 开发模式。首次准备 Command Line Tools 和 arm64 鸿蒙模拟器后执行：
+
+```sh
+pnpm dev:harmony:rn          # Metro + 模拟器 + 最新 Debug HAP + 安装启动
+pnpm dev:harmony:rn:noWindow # 同上，以无窗口模式启动模拟器
+pnpm build:harmony:rn        # 仅生成 harmony bundle 和资源
+pnpm build:harmony:rn:app    # 生成内嵌 bundle 的离线 Release HAP
+```
+
+产物在 `dist/harmony-rn/`，日志在 `.cache/harmony-rn/`。Debug 连接 8081 Metro，Ctrl-C 清理本次服务，Release 从 HAP 加载。支持的原生能力、签名边界与具体环境变量见 [鸿蒙 RN 宿主说明](apps/harmonyos-rn/README.md)。现有 `harmony_cpp` 命令继续使用原宿主。
+
 ## 构建产物
 
 所有交付物统一放在仓库根目录 `dist/<App 或交付目标>/`，一级子目录直接使用 `h5`、`weapp`、`ios` 等交付目标，不增加源码工程层级，各目标互不覆盖：
@@ -104,6 +118,9 @@ pnpm dev:harmony:noWindow # 同上，无窗口模式启动模拟器（自动化�
 | `pnpm build:harmony` | 注入 `apps/harmonyos/entry/src/main/ets/`（不经 `dist/`） |
 | `pnpm build:harmony:app` | `dist/harmony/app/HybridApp-debug.hap`（未签名，供模拟器） |
 | `pnpm dev:harmony` | 同上 HAP，并安装到鸿蒙模拟器运行 |
+| `pnpm build:harmony:rn` | `dist/harmony-rn/bundle/` |
+| `pnpm dev:harmony:rn` | `dist/harmony-rn/app/debug/HybridApp-debug.hap` |
+| `pnpm build:harmony:rn:app` | `dist/harmony-rn/app/release/HybridApp-release.hap` |
 
 其他 Taro 平台使用 `dist/<平台>/`。iOS 原生脚本把 Xcode 缓存保存在 `.cache/ios/`，Android 原生脚本把 Gradle 缓存与中间文件保存在 `.cache/android/`，鸿蒙脚本把构建日志保存在 `.cache/harmony/`，成功后将原生产物复制到对应交付目录。`dist/` 和 `.cache/` 均不提交。
 

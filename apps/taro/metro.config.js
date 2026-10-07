@@ -28,7 +28,7 @@ const config = {
       new RegExp(`^${escapeRegExp(repoRoot)}/\\.cache/`),
       new RegExp(`^${escapeRegExp(repoRoot)}/dist/`),
       // 鸿蒙依赖包含同名 React 包，不能进入 RN 的 Haste 模块索引。
-      new RegExp(`^${escapeRegExp(repoRoot)}/apps/harmonyos/oh_modules/`),
+      new RegExp(`^${escapeRegExp(repoRoot)}/apps/harmonyos(?:-rn)?/(?:entry/)?oh_modules/`),
       // Pods/codegen 会在原生编译期间改写文件，避免 Metro 索引这些非 JS 构建输入。
       new RegExp(`^${escapeRegExp(repoRoot)}/apps/ios/(Pods|build)/`)
     ]

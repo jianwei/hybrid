@@ -49,3 +49,13 @@ apps/harmonyos/.preview/
 /.hvigor/
 # Gradle 9 意外生成的工程级报告目录（构建中间文件实际在 .cache/android/）
 apps/android/build/
+
+# 独立 RNOH 宿主：原生依赖、内嵌 bundle 与编译缓存
+apps/harmonyos-rn/**/oh_modules/
+apps/harmonyos-rn/.hvigor/
+apps/harmonyos-rn/**/build/
+apps/harmonyos-rn/entry/.cxx/
+apps/harmonyos-rn/entry/src/main/resources/rawfile/
+apps/harmonyos-rn/local.properties
+apps/harmonyos-rn/.preview/
+apps/harmonyos-rn/entry/src/main/cpp/generated/

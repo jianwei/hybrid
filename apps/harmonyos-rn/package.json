@@ -1,0 +1,12 @@
+{
+  "name": "@hybrid/harmonyos-rn",
+  "version": "1.0.0",
+  "private": true,
+  "description": "加载共享 Taro RN 页面的独立鸿蒙宿主",
+  "scripts": {
+    "bundle": "node scripts/run.mjs bundle",
+    "build": "node scripts/run.mjs build",
+    "dev": "node scripts/run.mjs dev",
+    "dev:noWindow": "node scripts/run.mjs dev --noWindow"
+  }
+}

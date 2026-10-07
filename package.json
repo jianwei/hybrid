@@ -20,7 +20,11 @@
     "ios:open": "pnpm --filter @hybrid/ios run open",
     "dev:android": "pnpm --filter @hybrid/android run dev",
     "build:android": "pnpm --filter @hybrid/android run bundle",
-    "build:android:apk": "pnpm --filter @hybrid/android run build"
+    "build:android:apk": "pnpm --filter @hybrid/android run build",
+    "build:harmony:rn": "pnpm --filter @hybrid/harmonyos-rn run bundle",
+    "build:harmony:rn:app": "pnpm --filter @hybrid/harmonyos-rn run build",
+    "dev:harmony:rn": "pnpm --filter @hybrid/harmonyos-rn run dev",
+    "dev:harmony:rn:noWindow": "pnpm --filter @hybrid/harmonyos-rn run dev:noWindow"
   },
   "engines": {
     "node": ">=24.11.0"

@@ -1,0 +1,16 @@
+{
+  "string": [
+    {
+      "name": "app_name",
+      "value": "HybridApp"
+    },
+    {
+      "name": "module_desc",
+      "value": "HybridApp HarmonyOS entry"
+    },
+    {
+      "name": "EntryAbility_desc",
+      "value": "HybridApp entry ability"
+    }
+  ]
+}

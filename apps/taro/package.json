@@ -60,6 +60,9 @@
     "@react-native-community/netinfo": "11.1.0",
     "@react-native-community/slider": "4.4.2",
     "@react-native-masked-view/masked-view": "~0.3.1",
+    "@react-native-oh-tpl/react-native-gesture-handler": "2.14.17-rc.0",
+    "@react-native-oh-tpl/react-native-safe-area-context": "4.7.4-0.2.1",
+    "@react-native-oh/react-native-harmony": "0.72.140",
     "@react-native-picker/picker": "~2.6.1",
     "@taroify/core": "1.0.6",
     "@tarojs/components": "4.2.1",
@@ -143,6 +146,7 @@
     "husky": "^9.1.7",
     "less": "^4.9.1",
     "lint-staged": "^17.6.0",
+    "metro-react-native-babel-preset": "0.76.8",
     "postcss": "^8.5.28",
     "react-refresh": "^0.14.2",
     "sass": "^1.105.0",
@@ -150,10 +154,16 @@
     "stylelint-config-standard": "36.0.1",
     "typescript": "~6.0.3",
     "vite": "^4.5.14",
-    "webpack": "5.91.0",
-    "metro-react-native-babel-preset": "0.76.8"
+    "webpack": "5.91.0"
   },
   "engines": {
     "node": ">=24.11.0"
+  },
+  "harmony": {
+    "codegenConfig": {
+      "specPaths": [
+        "./node_modules/@react-native-oh-tpl/react-native-gesture-handler/src/specs"
+      ]
+    }
   }
 }

@@ -68,6 +68,8 @@ Taroify 官方支持范围为小程序与 H5，未声明支持 React Native。�
 
 `pnpm run dev:ios` 启动 Taro Metro、打开模拟器，并构建安装最新 Debug App；保持运行即可在源码修改后 Fast Refresh。只启动 Metro 可使用 `pnpm --filter taro run dev:rn:ios`。`pnpm build:ios` 生成根目录下的 `dist/ios/bundle/main.jsbundle` 与图片资源，供 iOS 宿主使用。`pnpm build:ios:app` 继续生成原生模拟器 App。`rn.appName` 必须与原生宿主的 `HybridApp` 模块名一致。通用 `build:rn` 的 Android 产物写入 `dist/rn/android/`。
 
+鸿蒙 RN 使用独立 [RNOH 宿主](../harmonyos-rn/README.md) 和 `metro.harmony.config.js`，共享本目录页面。根目录 `pnpm dev:harmony:rn` / `pnpm dev:harmony:rn:noWindow` 启动开发，`pnpm build:harmony:rn` 仅打 bundle，`pnpm build:harmony:rn:app` 生成离线 Release HAP。产物在 `dist/harmony-rn/`。鸿蒙专用 Taro API / 组件适配位于 `harmony/`，未接入能力明确抛错；新增能力须按宿主文档连接原生实现，不能直接依赖 Expo 聚合入口。
+
 `index.js` 与 `metro.config.js` 接入 Taro RN 编译器；Metro 的 `watchFolders` 覆盖 workspace 根目录以解析 pnpm 符号链接。iOS 开发和构建脚本直接调用 RN CLI 的 `start` / `bundle`，仍通过 Taro Metro transformer 编译；开发入口不使用 Taro 的交互式 TerminalReporter，便于编排脚本管理服务生命周期。
 
 原生启动、依赖安装和 Release 运行方式见 [iOS 宿主说明](../ios/README.md)。

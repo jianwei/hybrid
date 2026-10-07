@@ -1,6 +1,6 @@
 # 鸿蒙客户端规则
 
-HarmonyOS 宿主位于 `apps/harmonyos`（Stage 模型，最低兼容 API 14，包名 `com.tuniu.hybrid`），采用 Taro 官方 C-API 方案（`@tarojs/plugin-platform-harmony-cpp`）：`apps/taro` 页面经 Vite 编译为 ArkTS/C-API 运行时代码并注入宿主 `entry` HAP。该链路与 RN 宿主（iOS/Android）完全独立，不涉及 react-native 与 expo 依赖。
+现有 Taro C-API 宿主位于 `apps/harmonyos`（Stage 模型，最低兼容 API 14，包名 `com.tuniu.hybrid`），采用 Taro 官方 C-API 方案（`@tarojs/plugin-platform-harmony-cpp`）：`apps/taro` 页面经 Vite 编译为 ArkTS/C-API 运行时代码并注入宿主 `entry` HAP。该链路与 RN 宿主（iOS/Android）完全独立，不涉及 react-native 与 expo 依赖。
 
 ## 构建与运行
 
@@ -27,3 +27,12 @@ HarmonyOS 宿主位于 `apps/harmonyos`（Stage 模型，最低兼容 API 14，�
 ## 验证范围
 
 `pnpm dev:harmony` 已在鸿蒙模拟器（HarmonyOS 7.0.0，API 26）实测通过，首页正常渲染。真机签名安装未验证。
+
+## 独立 RN 宿主
+
+`apps/harmonyos-rn` 使用 RNOH 0.72.140 / RN 0.72.5 / Hermes / C-API，包名 `com.tuniu.hybrid.rn`，详细命令及能力边界以 [RN 宿主说明](../../apps/harmonyos-rn/README.md) 为准。`dev:harmony:rn` 与 `dev:harmony:rn:noWindow` 编排 Metro、设备、Debug HAP；`build:harmony:rn` 只生成 bundle，`build:harmony:rn:app` 生成内嵌 bundle 的 Release HAP。产物和缓存分别为 `dist/harmony-rn/`、`.cache/harmony-rn/`。
+
+- Debug 仅使用 Metro，Release 仅使用内嵌 rawfile；验证时分别检查设备首页、生命周期、Fast Refresh 和关闭 Metro 后的离线启动。
+- 使用 npm 固定版本随附 release HAR（当前仅 arm64-v8a），构建前执行 ohpm 与手势 Codegen。不要手改 oh_modules、生成的 C++ 或 rawfile。
+- 鸿蒙专用依赖不得加入 iOS/Android autolinking；仅鸿蒙 Metro 入口负责 alias 和 API 能力裁剪，未接入能力必须明确失败。
+- 当前 React Native 三端升级不合并到鸿蒙宿主工作中。新增原生能力按实际 HAR / JS 版本与设备结果核验，不能用 bundle 成功替代 HAP 和运行验证。
