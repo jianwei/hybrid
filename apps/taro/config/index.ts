@@ -3,6 +3,17 @@ import { resolve } from 'node:path'
 import devConfig from './dev'
 import prodConfig from './prod'
 
+type H5DesignWidthInput = string | number | { file?: string } | undefined
+
+/**
+ * 按样式来源选择 H5 设计基准，保留 Taroify 自带的 750 设计体系
+ *
+ * @param input - PostCSS 输入或 Taro 生成根字号脚本时传入的基础字号
+ * @returns 当前样式应使用的设计宽度
+ */
+const getH5DesignWidth = (input: H5DesignWidthInput): number =>
+  typeof input === 'object' && input?.file?.includes('@taroify') ? 750 : 375
+
 // https://taro-docs.jd.com/docs/next/config#defineconfig-辅助函数
 export default defineConfig<'webpack5'>(async (merge) => {
   const baseConfig: UserConfigExport<'webpack5'> = {
@@ -84,6 +95,19 @@ export default defineConfig<'webpack5'>(async (merge) => {
         autoprefixer: {
           enable: true,
           config: {}
+        },
+        pxtransform: {
+          enable: true,
+          config: {
+            baseFontSize: 16,
+            designWidth: getH5DesignWidth,
+            deviceRatio: {
+              375: 2,
+              750: 1
+            },
+            minRootSize: 0,
+            targetUnit: 'rem'
+          }
         },
         cssModules: {
           enable: false, // 默认为 false，如需使用 css modules 功能，则设为 true

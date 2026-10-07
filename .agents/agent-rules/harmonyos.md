@@ -30,7 +30,7 @@
 
 ## 独立 RN 宿主
 
-`apps/harmonyos-rn` 使用 RNOH 0.72.140 / RN 0.72.5 / Hermes / C-API，包名 `com.tuniu.hybrid.rn`，详细命令及能力边界以 [RN 宿主说明](../../apps/harmonyos-rn/README.md) 为准。`dev:harmony:rn` 与 `dev:harmony:rn:noWindow` 编排 Metro、设备、Debug HAP；`build:harmony:rn` 只生成 bundle，`build:harmony:rn:app` 生成内嵌 bundle 的 Release HAP。产物和缓存分别为 `dist/harmony-rn/`、`.cache/harmony-rn/`。
+`apps/harmonyos-rn` 使用 RNOH 0.72.140 / RN 0.72.5 / Hermes / C-API，包名 `com.tuniu.hybrid.rn`，详细命令及能力边界以 [RN 宿主说明](../../apps/harmonyos-rn/README.md) 为准。`dev:harmony:rn` 与 `dev:harmony:rn:noWindow` 编排 Metro、设备、Debug HAP；`build:harmony:rn` 只生成 bundle，`build:harmony:rn:app` 生成内嵌 bundle 的 Release HAP。产物和缓存分别为 `dist/rn/harmony/`、`.cache/harmony-rn/`；bundle 放在 `dist/rn/harmony/bundle/`，HAP 放在 `dist/rn/harmony/app/`。
 
 - Debug 仅使用 Metro，Release 仅使用内嵌 rawfile；验证时分别检查设备首页、生命周期、Fast Refresh 和关闭 Metro 后的离线启动。
 - 使用 npm 固定版本随附 release HAR（当前仅 arm64-v8a），构建前执行 ohpm 与手势 Codegen。不要手改 oh_modules、生成的 C++ 或 rawfile。

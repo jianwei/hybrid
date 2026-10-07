@@ -1,0 +1,6 @@
+/* #ifdef h5 */
+html {
+  // 固定回退值使用大写单位跳过 pxtransform；运行时会按视口更新根字号
+  font-size: 16PX;
+}
+/* #endif */
